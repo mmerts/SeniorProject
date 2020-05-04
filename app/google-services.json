@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "431486127999",
+    "firebase_url": "https://leadtheway-e96dd.firebaseio.com",
+    "project_id": "leadtheway-e96dd",
+    "storage_bucket": "leadtheway-e96dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431486127999:android:78aadb45ef306eedba144a",
+        "android_client_info": {
+          "package_name": "com.tedu.leadtheway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431486127999-p10od3m48eogco4f0148lssvlilkg2oa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tedu.leadtheway",
+            "certificate_hash": "142ddce0d9c49496cb3817102b41547ab173cd62"
+          }
+        },
+        {
+          "client_id": "431486127999-a09lroc9v5qj50ncsejto677ou3rtsia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUUwg7ecNJo85WmV5olq7C5wr-WwNs_cA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431486127999-a09lroc9v5qj50ncsejto677ou3rtsia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

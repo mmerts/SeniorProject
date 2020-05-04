@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".ThirdpageActivity">
+
+    <Button
+        android:id="@+id/buttonmain2"
+        android:layout_width="213dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/buttonshape"
+        android:backgroundTint="#550263"
+        android:text="Lead The Way"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonwithoutlogin"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/buttonlocation"
+        android:layout_width="116dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/buttonshape"
+        android:text="Location"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/buttonstarttime"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="47dp" />
+
+    <Button
+        android:id="@+id/buttonstarttime"
+        android:layout_width="116dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/buttonshape"
+        android:text="Start Time"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/buttontransportation"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="47dp" />
+    //layout editor size:12
+    <Button
+        android:id="@+id/buttontransportation"
+        android:layout_width="116dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/buttonshape"
+        android:text="Transportation"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/buttonendtime"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="47dp" />
+
+    <Button
+        android:id="@+id/buttonendtime"
+        android:layout_width="116dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/buttonshape"
+        android:text="End Time"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/buttoninterest"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="47dp" />
+
+    <Button
+        android:id="@+id/buttoninterest"
+        android:layout_width="116dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/buttonshape"
+        android:text="Interest"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/buttonmain2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="47dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

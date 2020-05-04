@@ -1,6 +1,5 @@
 package com.example.leadtheway;
 
-// test
 
 public class myObject {
     private String id;

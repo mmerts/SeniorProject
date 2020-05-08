@@ -42,11 +42,11 @@ public class RegisterActivity extends AppCompatActivity {
                 firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(RegisterActivity.this,"Registered successfully",Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                    }
+                        if(task.isSuccessful()){
+                            Toast.makeText(RegisterActivity.this,"Registered successfully",Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }

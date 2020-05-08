@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonsecondpage;
     private Button registerButton;
+    private Button loginButton;
     //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         //test
         buttonsecondpage = (Button) findViewById(R.id.buttonmain);
         registerButton = (Button) findViewById(R.id.buttonregister);
+        loginButton = (Button) findViewById(R.id.buttonlogin);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
         });
 
     }

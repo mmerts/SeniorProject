@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonsecondpage;
     private Button registerButton;
+    //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

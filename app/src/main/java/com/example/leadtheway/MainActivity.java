@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //test
         buttonsecondpage = (Button) findViewById(R.id.buttonmain);
         registerButton = (Button) findViewById(R.id.buttonregister);
         loginButton = (Button) findViewById(R.id.buttonlogin);

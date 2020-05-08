@@ -37,7 +37,7 @@ public class InsertActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_menu,menu);
+        inflater.inflate(R.menu.signout,menu);
         return true;
     }
 
@@ -46,7 +46,7 @@ public class InsertActivity extends AppCompatActivity {
 
         switch (item.getItemId())
         {
-            case R.id.save_menu:
+            case R.id.signOut:
                 saveDeal();
                 Toast.makeText(this,"Deal saved",Toast.LENGTH_LONG).show();
                 clean();

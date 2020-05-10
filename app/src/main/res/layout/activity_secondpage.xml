@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/buttonCity"
+        android:id="@+id/buttonselectcoutry"
         android:layout_width="111dp"
         android:layout_height="29dp"
 
@@ -52,11 +52,10 @@
         android:background="@drawable/buttonshape"
         android:backgroundTint="#550263"
         android:clickable="true"
-        android:text="City"
+        android:text="Country/City"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/buttonDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonwithoutlogin"
         app:layout_constraintVertical_bias="1.0" />

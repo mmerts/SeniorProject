@@ -14,13 +14,15 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ChoosenpageActivity" />
         <activity android:name=".ThirdpageActivity" />
-        <activity android:name=".SecondpageActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SecondpageActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
         <activity android:name=".AnotherDatabaseExample" />
         <activity android:name=".RetrieveActivity" />

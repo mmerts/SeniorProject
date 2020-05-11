@@ -9,7 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,12 +23,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class SecondpageActivity extends AppCompatActivity {
 
     DatabaseReference mdatabase;
-    Button buttonthirdpage, buttoncountry;
+    Button buttonthirdpage, Countrybutton, Citybutton;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+
+    Spinner mSpinnerCountry,mSpinnerCity;
+    String country = "";
+    String[] countryoptions = {"Turkey", "Holland", "Germany"};
+    ValueEventListener listener;
+    ArrayAdapter<String> adaptercountry;
+    ArrayAdapter<String> adaptercity;
+
+    ArrayList<String> spinnerDataListCountry;
+    ArrayList<String> spinnerDataListCity;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +51,83 @@ public class SecondpageActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        buttoncountry = (Button) findViewById(R.id.buttonselectcoutry);
+
+
+        mSpinnerCountry = findViewById(R.id.spinnercountry);
+        mSpinnerCity = findViewById(R.id.spinnercity);
+
+
+        Citybutton = (Button) findViewById(R.id.buttonselectcity);
+        Countrybutton = (Button) findViewById(R.id.buttonselectcoutry);
         buttonthirdpage = (Button) findViewById(R.id.buttonNext);
+
+
+
+        mdatabase = FirebaseDatabase.getInstance().getReference().child("Countries");
+        spinnerDataListCountry = new ArrayList<>();
+        adaptercountry = new ArrayAdapter<String>(SecondpageActivity.this, android.R.layout.simple_spinner_dropdown_item, spinnerDataListCountry);
+        mSpinnerCountry.setAdapter(adaptercountry);
+        retrieveDataCountry();
+
+
+
+
+
+
+
+
+        mSpinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
+                // mdatabase = FirebaseDatabase.getInstance().getReference().child("Cities");
+                Countrybutton.setText(parent.getItemAtPosition(position).toString());
+                country = parent.getItemAtPosition(position).toString();
+
+                mdatabase = FirebaseDatabase.getInstance().getReference().child("Cities").child(country);
+                spinnerDataListCity = new ArrayList<>();
+                adaptercity = new ArrayAdapter<String>(SecondpageActivity.this, android.R.layout.simple_spinner_dropdown_item, spinnerDataListCity);
+                mSpinnerCity.setAdapter(adaptercity);
+                retrieveDataCity();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+
+
+        //ArrayAdapter arraycountry = new ArrayAdapter(this, android.R.layout.simple_spinner_item, countryoptions);
+        //arraycountry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //mSpinnerCountry.setAdapter(arraycountry);
+/*
+        mdatabase = FirebaseDatabase.getInstance().getReference().child("Countries");
+        mdatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                 c1 = dataSnapshot.child("Countryid1").getValue().toString();
+                 c2 = dataSnapshot.child("Countryid2").getValue().toString();
+                 c3 = dataSnapshot.child("Countryid3").getValue().toString();
+
+
+
+            }
+
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         buttonthirdpage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,19 +136,16 @@ public class SecondpageActivity extends AppCompatActivity {
             }
         });
 
-
-        //when click country/city button go to citybutton page and selection of country then city
-        buttoncountry.setOnClickListener(new View.OnClickListener() {
+*/
+//when click country/city button go to citybutton page and selection of country then city
+ /*       Countrybutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SecondpageActivity.this, CityButton.class);
                 startActivity(intent);
             }
         });
-
-
-
-
+*/
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -89,17 +178,50 @@ public class SecondpageActivity extends AppCompatActivity {
 
     //City activity
 
-
-
-
-
-
-
     public void OpenThirdPage(){
 
         Intent intent = new Intent(this, ThirdpageActivity.class);
         startActivity(intent);
     }
+
+
+    public void retrieveDataCountry(){
+        listener = mdatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot item:dataSnapshot.getChildren()){
+                    spinnerDataListCountry.add(item.getValue().toString());
+
+                }
+                adaptercountry.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    public void retrieveDataCity(){
+        listener = mdatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot item:dataSnapshot.getChildren()){
+                    spinnerDataListCity.add(item.getValue().toString());
+
+                }
+                adaptercity.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
 
 

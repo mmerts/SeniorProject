@@ -29,7 +29,7 @@
         android:id="@+id/buttonDate"
         android:layout_width="112dp"
         android:layout_height="29dp"
-        android:layout_marginBottom="356dp"
+        android:layout_marginBottom="332dp"
 
         android:background="@drawable/buttonshape"
         android:backgroundTint="#550263"
@@ -38,26 +38,60 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonwithoutlogin"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/buttonselectcoutry"
-        android:layout_width="111dp"
-        android:layout_height="29dp"
 
-        android:layout_marginBottom="68dp"
-        android:background="@drawable/buttonshape"
-        android:backgroundTint="#550263"
-        android:clickable="true"
-        android:text="Country/City"
-        android:textAllCaps="false"
+    <LinearLayout
+        android:layout_width="173dp"
+        android:layout_height="143dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/buttonDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonwithoutlogin"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.791"
+        tools:layout_editor_absoluteX="149dp"
+        tools:ignore="MissingConstraints">
+
+
+        <Button
+            android:id="@+id/buttonselectcoutry"
+            android:layout_width="111dp"
+            android:layout_height="29dp"
+
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/buttonshape"
+            android:backgroundTint="#550263"
+            android:clickable="false"
+            android:text="Select Country"
+            android:textAllCaps="false" />
+        <Spinner
+            android:id="@+id/spinnercountry"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="20dp" />
+
+
+
+        <Button
+            android:id="@+id/buttonselectcity"
+            android:layout_width="111dp"
+            android:layout_height="29dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/buttonshape"
+            android:backgroundTint="#550263"
+            android:clickable="false"
+            android:text="Select City"
+            android:textAllCaps="false" />
+        <Spinner
+            android:id="@+id/spinnercity"
+            android:layout_width="100dp"
+            android:layout_height="25dp" />
+
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,11 @@ package com.example.leadtheway;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+import java.util.Calendar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,9 +33,16 @@ import java.util.ArrayList;
 public class SecondpageActivity extends AppCompatActivity {
 
     DatabaseReference mdatabase;
-    Button buttonthirdpage, Countrybutton, Citybutton;
+    Button buttonthirdpage, Countrybutton, Citybutton,selectDate;
+    DatePickerDialog datePickerDialog;
+    TextView showDate;
+    Calendar calendar;
+    int year,month,day;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+
+
+
 
     Spinner mSpinnerCountry,mSpinnerCity;
     String country = "";
@@ -58,8 +70,30 @@ public class SecondpageActivity extends AppCompatActivity {
 
 
         Citybutton = (Button) findViewById(R.id.buttonselectcity);
-        Countrybutton = (Button) findViewById(R.id.buttonselectcoutry);
+        Countrybutton = (Button) findViewById(R.id.buttonselectcountry);
         buttonthirdpage = (Button) findViewById(R.id.buttonNext);
+
+
+        showDate = (TextView) findViewById(R.id.datetxt);
+        selectDate = (Button)findViewById(R.id.buttonDate);
+        selectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                datePickerDialog = new DatePickerDialog(SecondpageActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                showDate.setText(day + "/" + (month+1) + "/" + year);
+                            }}, year, month, day);
+                datePickerDialog.show();
+
+            }
+        });
 
 
 

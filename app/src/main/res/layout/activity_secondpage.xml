@@ -44,6 +44,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="173dp"
         android:layout_height="143dp"
         android:layout_margin="10dp"
@@ -51,12 +52,12 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonDate"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.791"
-        tools:layout_editor_absoluteX="149dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="149dp">
 
 
         <Button
-            android:id="@+id/buttonselectcoutry"
+            android:id="@+id/buttonselectcountry"
             android:layout_width="111dp"
             android:layout_height="29dp"
 
@@ -66,6 +67,7 @@
             android:clickable="false"
             android:text="Select Country"
             android:textAllCaps="false" />
+
         <Spinner
             android:id="@+id/spinnercountry"
             android:layout_width="100dp"
@@ -84,6 +86,10 @@
             android:clickable="false"
             android:text="Select City"
             android:textAllCaps="false" />
+
+
+
+
         <Spinner
             android:id="@+id/spinnercity"
             android:layout_width="100dp"
@@ -115,9 +121,12 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/buttonselectcoutry"
+
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.134" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

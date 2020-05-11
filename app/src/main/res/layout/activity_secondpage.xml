@@ -50,10 +50,12 @@
         android:layout_margin="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/buttonDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.791"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="149dp">
+        app:layout_constraintVertical_bias="0.885"
+        tools:ignore="MissingConstraints">
 
 
         <Button
@@ -75,7 +77,6 @@
             android:layout_marginBottom="20dp" />
 
 
-
         <Button
             android:id="@+id/buttonselectcity"
             android:layout_width="111dp"
@@ -89,7 +90,6 @@
 
 
 
-
         <Spinner
             android:id="@+id/spinnercity"
             android:layout_width="100dp"
@@ -97,7 +97,6 @@
 
 
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/datetxt"

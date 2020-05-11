@@ -3,6 +3,7 @@ package com.example.leadtheway;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,12 +24,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 public class SecondpageActivity extends AppCompatActivity {
 
     DatabaseReference mdatabase;
-    Button buttonthirdpage, buttoncountry;
+    Button buttonthirdpage, buttoncountry,selectDate;
+    DatePickerDialog datePickerDialog;
+    TextView showDate;
+    Calendar calendar;
+    int year,month,day;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +46,32 @@ public class SecondpageActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
+        showDate = (TextView) findViewById(R.id.datetxt);
+        selectDate = (Button)findViewById(R.id.buttonDate);
+        selectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            datePickerDialog = new DatePickerDialog(SecondpageActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                    showDate.setText(day + "/" + (month+1) + "/" + year);
+                }}, year, month, day);
+            datePickerDialog.show();
+
+            }
+        });
+
+
+
         buttoncountry = (Button) findViewById(R.id.buttonselectcoutry);
         buttonthirdpage = (Button) findViewById(R.id.buttonNext);
+
 
         buttonthirdpage.setOnClickListener(new View.OnClickListener() {
             @Override

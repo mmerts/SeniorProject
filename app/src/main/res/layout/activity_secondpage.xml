@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:backgroundTint="#000000"
     tools:context=".SecondpageActivity">
 
     <Button
@@ -59,5 +58,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonwithoutlogin"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/datetxt"
+        android:layout_width="151dp"
+        android:layout_height="47dp"
+        android:textColor="#510C0C"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDate" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="278dp"
+        android:layout_height="55dp"
+        android:fontFamily="sans-serif"
+        android:text="Please Select your date of travel"
+        android:textAlignment="viewStart"
+        android:textColor="#932424"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintBottom_toTopOf="@+id/buttonselectcoutry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

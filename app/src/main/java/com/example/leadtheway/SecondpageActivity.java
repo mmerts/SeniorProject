@@ -162,7 +162,7 @@ public class SecondpageActivity extends AppCompatActivity {
         });
 
 
-
+*/
         buttonthirdpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,7 +170,7 @@ public class SecondpageActivity extends AppCompatActivity {
             }
         });
 
-*/
+
 //when click country/city button go to citybutton page and selection of country then city
  /*       Countrybutton.setOnClickListener(new View.OnClickListener() {
             @Override

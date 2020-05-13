@@ -7,13 +7,13 @@
     tools:context=".ThirdpageActivity">
 
     <Button
-        android:id="@+id/buttonmain2"
+        android:id="@+id/buttonfourtpage"
         android:layout_width="213dp"
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="48dp"
         android:background="@drawable/buttonshape"
         android:backgroundTint="#550263"
         android:text="Lead The Way"
@@ -28,72 +28,33 @@
         android:layout_width="116dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="128dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="52dp"
         android:background="@drawable/buttonshape"
         android:text="Location"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/startTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintHorizontal_bias="0.143"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941"
         tools:ignore="MissingConstraints" />
+
 
     <Button
         android:id="@+id/endTime"
         android:layout_width="116dp"
         android:layout_height="38dp"
         android:layout_marginStart="47dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="248dp"
-        android:layout_marginBottom="96dp"
         android:background="@drawable/buttonshape"
         android:text="End Time"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/buttoninterest"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttontransportation"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/buttontransportation"
-        android:layout_width="116dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/buttonshape"
-        android:text="Transportation"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/endTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTime"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/buttoninterest"
-        android:layout_width="116dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="248dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/buttonshape"
-        android:text="Interest"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/buttonmain2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endTime"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.367"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -101,49 +62,104 @@
         android:layout_width="116dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="98dp"
         android:background="@drawable/buttonshape"
         android:text="Start Time"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/buttontransportation"
+        app:layout_constraintBottom_toTopOf="@+id/endTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonlocation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.735"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txtStartTime"
-        android:layout_width="103dp"
-        android:layout_height="33dp"
+        android:layout_width="111dp"
+        android:layout_height="37dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="148dp"
         android:textColor="#971919"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonmain2"
+        app:layout_constraintBottom_toTopOf="@+id/txtEndTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toEndOf="@+id/startTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintVertical_bias="0.737"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txtEndTime"
         android:layout_width="109dp"
         android:layout_height="38dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginBottom="32dp"
         android:textColor="#751E1E"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonmain2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toEndOf="@+id/endTime"
-        app:layout_constraintTop_toBottomOf="@+id/txtStartTime"
-        app:layout_constraintVertical_bias="0.213" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="272dp"
+        android:layout_height="247dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/endTime"
+        app:layout_constraintVertical_bias="0.302"
+        tools:ignore="MissingConstraints">
+
+
+        <Button
+            android:id="@+id/buttoninterest"
+            android:layout_width="116dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="248dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/buttonshape"
+            android:text="Interest"
+            android:textAllCaps="false"
+            tools:ignore="MissingConstraints" />
+
+        <Spinner
+            android:id="@+id/spinnerinterest"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:spinnerMode="dialog" />
+
+        <Button
+            android:id="@+id/buttontransportation"
+            android:layout_width="116dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/buttonshape"
+            android:text="Transportation"
+            android:textAllCaps="false"
+            tools:ignore="MissingConstraints" />
+
+        <Spinner
+            android:id="@+id/spinnertransport"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:spinnerMode="dialog" />
+
+
+    </LinearLayout>
+
+
     //layout editor size:12
 
 </androidx.constraintlayout.widget.ConstraintLayout>

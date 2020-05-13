@@ -45,7 +45,7 @@ public class SecondpageActivity extends AppCompatActivity {
 
 
     Spinner mSpinnerCountry,mSpinnerCity;
-    String country = "";
+    String country, city;
     String[] countryoptions = {"Turkey", "Holland", "Germany"};
     ValueEventListener listener;
     ArrayAdapter<String> adaptercountry;
@@ -62,7 +62,6 @@ public class SecondpageActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-
 
 
         mSpinnerCountry = findViewById(R.id.spinnercountry);
@@ -97,6 +96,8 @@ public class SecondpageActivity extends AppCompatActivity {
 
 
 
+
+
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Countries");
         spinnerDataListCountry = new ArrayList<>();
         adaptercountry = new ArrayAdapter<String>(SecondpageActivity.this, android.R.layout.simple_spinner_dropdown_item, spinnerDataListCountry);
@@ -115,7 +116,7 @@ public class SecondpageActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
                 // mdatabase = FirebaseDatabase.getInstance().getReference().child("Cities");
                 Countrybutton.setText(parent.getItemAtPosition(position).toString());
-                country = parent.getItemAtPosition(position).toString();
+                country = parent.getItemAtPosition(position).toString(); // hold country information
 
                 mdatabase = FirebaseDatabase.getInstance().getReference().child("Cities").child(country);
                 spinnerDataListCity = new ArrayList<>();
@@ -123,6 +124,22 @@ public class SecondpageActivity extends AppCompatActivity {
                 mSpinnerCity.setAdapter(adaptercity);
                 retrieveDataCity();
 
+
+
+                mSpinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int positioncity, long l) {
+
+                        Citybutton.setText(parent.getItemAtPosition(positioncity).toString());
+                        city = parent.getItemAtPosition(positioncity).toString(); // hold country information
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
 
             }
 

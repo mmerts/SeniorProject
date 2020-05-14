@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SecondpageActivity extends AppCompatActivity {
 
@@ -53,6 +54,9 @@ public class SecondpageActivity extends AppCompatActivity {
 
     ArrayList<String> spinnerDataListCountry;
     ArrayList<String> spinnerDataListCity;
+    private String userDateChoice;
+    private String userCountryChoice;
+    private String userCityChoice;
 
 
     @Override
@@ -82,12 +86,12 @@ public class SecondpageActivity extends AppCompatActivity {
                 year = calendar.get(Calendar.YEAR);
                 month = calendar.get(Calendar.MONTH);
                 day = calendar.get(Calendar.DAY_OF_MONTH);
-
+                userDateChoice = day + "/" + (month+1) + "/" + year;
                 datePickerDialog = new DatePickerDialog(SecondpageActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                showDate.setText(day + "/" + (month+1) + "/" + year);
+                                showDate.setText(userDateChoice);
                             }}, year, month, day);
                 datePickerDialog.show();
 
@@ -232,6 +236,9 @@ public class SecondpageActivity extends AppCompatActivity {
     public void OpenThirdPage(){
 
         Intent intent = new Intent(this, ThirdpageActivity.class);
+        intent.putExtra("countryChoice",userCountryChoice);
+        intent.putExtra("CityChoice",userCityChoice);
+        intent.putExtra("DateChoice",userDateChoice);
         startActivity(intent);
     }
 
@@ -241,7 +248,8 @@ public class SecondpageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot item:dataSnapshot.getChildren()){
-                    spinnerDataListCountry.add(item.getValue().toString());
+                    userCountryChoice = item.getValue().toString();
+                    spinnerDataListCountry.add(userCountryChoice);
 
                 }
                 adaptercountry.notifyDataSetChanged();
@@ -260,7 +268,8 @@ public class SecondpageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot item:dataSnapshot.getChildren()){
-                    spinnerDataListCity.add(item.getValue().toString());
+                    userCityChoice = item.getValue().toString();
+                    spinnerDataListCity.add(userCityChoice);
 
                 }
                 adaptercity.notifyDataSetChanged();

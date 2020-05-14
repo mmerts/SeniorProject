@@ -159,6 +159,19 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/getCountryChoice"
+        android:layout_width="100dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="78dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtStartTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonlocation"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     //layout editor size:12
 

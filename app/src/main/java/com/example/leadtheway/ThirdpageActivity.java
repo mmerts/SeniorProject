@@ -31,6 +31,9 @@ public class ThirdpageActivity extends AppCompatActivity {
     TextView starttxt;
     TextView endtxt;
 
+    TextView getCountryChoice;
+
+
     DatabaseReference mdatabase;
     Button interestbutton, transportbutton;
     Button buttonfourtpage;
@@ -43,6 +46,13 @@ public class ThirdpageActivity extends AppCompatActivity {
 
     ArrayList<String> spinnerDataListInterest;
     ArrayList<String> spinnerDataListTransportation;
+    private String userCountryChoice;
+    private String userCityChoice;
+    private String userDateChoice;
+    private String startTime1;
+    private String endTime1;
+    private String userInterest;
+    private String userTransportation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,7 @@ public class ThirdpageActivity extends AppCompatActivity {
         starttxt = (TextView)findViewById(R.id.txtStartTime);
         endtxt = (TextView)findViewById(R.id.txtEndTime);
 
+        getCountryChoice =(TextView) findViewById(R.id.getCountryChoice);
 
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +77,8 @@ public class ThirdpageActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(ThirdpageActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        starttxt.setText(hourOfDay + ":"+ minute);
+                        startTime1 = hourOfDay + ":"+ minute;
+                        starttxt.setText(startTime1);
                     }
                 },hour,minute,true);
                 timePicker.setTitle("Please Select The Start Time");
@@ -88,7 +100,8 @@ public class ThirdpageActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(ThirdpageActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        endtxt.setText(hourOfDay + ":"+ minute);
+                        endTime1 = hourOfDay + ":"+ minute;
+                        endtxt.setText(endTime1);
                     }
                 },hour,minute,true);
                 timePicker.setTitle("Please Select The Start Time");
@@ -165,12 +178,26 @@ public class ThirdpageActivity extends AppCompatActivity {
         });
 
 
-
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            userCountryChoice = bundle.getString("countryChoice");
+            getCountryChoice.setText(userCountryChoice);
+            userCityChoice = bundle.getString("cityChoice");
+            userDateChoice = bundle.getString("DateChoice");
+        }
 
     }
 
     private void OpenFourthPage() {
         Intent intent = new Intent(this, FourthPageActivity.class);
+        intent.putExtra("countryChoice",userCountryChoice);
+        intent.putExtra("CityChoice",userCityChoice);
+        intent.putExtra("DateChoice",userDateChoice);
+
+        intent.putExtra("startTime",startTime1);
+        intent.putExtra("endTime",endTime1);
+        intent.putExtra("userInterest",userInterest);
+        intent.putExtra("userTransport",userTransportation);
         startActivity(intent);
     }
 
@@ -179,7 +206,8 @@ public class ThirdpageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot item:dataSnapshot.getChildren()){
-                    spinnerDataListInterest.add(item.getValue().toString());
+                    userInterest = item.getValue().toString();
+                    spinnerDataListInterest.add(userInterest);
 
                 }
                 adapterinterest.notifyDataSetChanged();
@@ -197,7 +225,8 @@ public class ThirdpageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot item:dataSnapshot.getChildren()){
-                    spinnerDataListTransportation.add(item.getValue().toString());
+                    userTransportation = item.getValue().toString();
+                    spinnerDataListTransportation.add(userTransportation);
 
                 }
                 adaptertransportation.notifyDataSetChanged();

@@ -29,7 +29,6 @@
         android:layout_width="172dp"
         android:layout_height="57dp"
         android:background="@drawable/buttonshape"
-        android:backgroundTint="#"
         android:text="Would you like to visit specific place "
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"

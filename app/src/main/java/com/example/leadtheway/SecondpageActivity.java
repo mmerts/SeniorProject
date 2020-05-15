@@ -47,7 +47,6 @@ public class SecondpageActivity extends AppCompatActivity {
 
     Spinner mSpinnerCountry,mSpinnerCity;
     String country, city;
-    String[] countryoptions = {"Turkey", "Holland", "Germany"};
     ValueEventListener listener;
     ArrayAdapter<String> adaptercountry;
     ArrayAdapter<String> adaptercity;

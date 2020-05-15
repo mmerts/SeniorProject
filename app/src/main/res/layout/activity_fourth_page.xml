@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ThirdpageActivity">
 
+    <LinearLayout
+        android:layout_width="377dp"
+        android:layout_height="642dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/buttonplanview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fourtpagetext"
+        tools:ignore="MissingConstraints">
+
+
+
+        <ListView
+            android:id="@+id/placelist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </ListView>
+
+
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/buttonplanview"
         android:layout_width="213dp"
@@ -35,10 +58,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 
     //layout editor size:12

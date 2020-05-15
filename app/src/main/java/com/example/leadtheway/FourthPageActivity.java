@@ -1,15 +1,14 @@
 package com.example.leadtheway;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,26 +34,29 @@ public class FourthPageActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterplacelist;
     ArrayList<String> PlaceArrayList = new ArrayList<>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fourth_page);
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        if(bundle != null) {
             userCountryChoice = bundle.getString("countryChoice");
-            userCityChoice = bundle.getString("cityChoice");
+            userCityChoice = bundle.getString("CityChoice");
             userDateChoice = bundle.getString("DateChoice");
             startTime = bundle.getString("startTime");
             endTime = bundle.getString("endTime");
             userInterest = bundle.getString("userInterest");
             userTransportation = bundle.getString("userTransport");
+        }
 
 
             mdatabase = FirebaseDatabase.getInstance().getReference().child("Historical Places(Museum)").child("Ankara");//BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
 
 
-            // mdatabase = FirebaseDatabase.getInstance().getReference().child("Restaurant").child(userCityChoice);
+            mdatabase = FirebaseDatabase.getInstance().getReference().child("Restaurant").child(userCityChoice);
 
 
             listView = (ListView) findViewById(R.id.placelist);
@@ -96,7 +98,7 @@ public class FourthPageActivity extends AppCompatActivity {
 
 */
         }
-    }
+
 
     public void retrieveDataPlaces(){
         listener = mdatabase.addValueEventListener(new ValueEventListener() {

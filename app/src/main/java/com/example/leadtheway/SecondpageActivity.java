@@ -54,8 +54,7 @@ public class SecondpageActivity extends AppCompatActivity {
     ArrayList<String> spinnerDataListCountry;
     ArrayList<String> spinnerDataListCity;
     private String userDateChoice;
-    private String userCountryChoice;
-    private String userCityChoice;
+
 
 
     @Override
@@ -235,8 +234,8 @@ public class SecondpageActivity extends AppCompatActivity {
     public void OpenThirdPage(){
 
         Intent intent = new Intent(this, ThirdpageActivity.class);
-        intent.putExtra("countryChoice",userCountryChoice);
-        intent.putExtra("CityChoice",userCityChoice);
+        intent.putExtra("countryChoice",country);
+        intent.putExtra("CityChoice",city);
         intent.putExtra("DateChoice",userDateChoice);
         startActivity(intent);
     }
@@ -247,9 +246,8 @@ public class SecondpageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot item:dataSnapshot.getChildren()){
-                    userCountryChoice = item.getValue().toString();
-                    spinnerDataListCountry.add(userCountryChoice);
-
+                    String data = item.getValue().toString();
+                    spinnerDataListCountry.add(data);
                 }
                 adaptercountry.notifyDataSetChanged();
             }
@@ -267,8 +265,8 @@ public class SecondpageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot item:dataSnapshot.getChildren()){
-                    userCityChoice = item.getValue().toString();
-                    spinnerDataListCity.add(userCityChoice);
+                    String data = item.getValue().toString();
+                    spinnerDataListCity.add(data);
 
                 }
                 adaptercity.notifyDataSetChanged();

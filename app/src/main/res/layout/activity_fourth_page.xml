@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ThirdpageActivity">
 
+
+
     <LinearLayout
         android:layout_width="377dp"
         android:layout_height="642dp"
@@ -17,17 +19,15 @@
         tools:ignore="MissingConstraints">
 
 
-
         <ListView
             android:id="@+id/placelist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
         </ListView>
 
 
     </LinearLayout>
-
 
     <Button
         android:id="@+id/buttonplanview"

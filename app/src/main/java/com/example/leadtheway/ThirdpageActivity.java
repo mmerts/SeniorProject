@@ -31,7 +31,7 @@ public class ThirdpageActivity extends AppCompatActivity {
     TextView starttxt;
     TextView endtxt;
 
-    TextView getCountryChoice;
+
 
 
     DatabaseReference mdatabase;
@@ -46,13 +46,16 @@ public class ThirdpageActivity extends AppCompatActivity {
 
     ArrayList<String> spinnerDataListInterest;
     ArrayList<String> spinnerDataListTransportation;
-    private String userCountryChoice;
+
+    public String userCountryChoice;
     private String userCityChoice;
     private String userDateChoice;
     private String startTime1;
     private String endTime1;
     private String userInterest;
     private String userTransportation;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class ThirdpageActivity extends AppCompatActivity {
         starttxt = (TextView)findViewById(R.id.txtStartTime);
         endtxt = (TextView)findViewById(R.id.txtEndTime);
 
-        getCountryChoice =(TextView) findViewById(R.id.getCountryChoice);
+
 
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,10 +184,10 @@ public class ThirdpageActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             userCountryChoice = bundle.getString("countryChoice");
-            getCountryChoice.setText(userCountryChoice);
-            userCityChoice = bundle.getString("cityChoice");
+            userCityChoice = bundle.getString("CityChoice");
             userDateChoice = bundle.getString("DateChoice");
         }
+
 
     }
 

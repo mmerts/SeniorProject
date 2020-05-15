@@ -1,14 +1,19 @@
 package com.example.leadtheway;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +31,7 @@ public class FourthPageActivity extends AppCompatActivity {
     private String endTime;
     private String userInterest;
     private String userTransportation;
+    boolean active = true;
 
     ValueEventListener listener;
     ListView listView;
@@ -53,23 +59,32 @@ public class FourthPageActivity extends AppCompatActivity {
         }
 
 
-            mdatabase = FirebaseDatabase.getInstance().getReference().child("Historical Places(Museum)").child("Ankara");//BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
 
 
-            mdatabase = FirebaseDatabase.getInstance().getReference().child("Restaurant").child(userCityChoice);
+
+            mdatabase = FirebaseDatabase.getInstance().getReference().child(userInterest).child(userCityChoice);//BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
+
+
+           // mdatabase = FirebaseDatabase.getInstance().getReference().child("Restaurant").child(userCityChoice);
 
 
             listView = (ListView) findViewById(R.id.placelist);
+
+            leadthewaybutton = (Button) findViewById(R.id.buttonplanview);
+            //listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+
+
             adapterplacelist = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, PlaceArrayList);
             listView.setAdapter(adapterplacelist);
-            retrieveDataPlaces();
+       //     retrieveDataPlaces();
 
 
-  /*          mdatabase.addChildEventListener(new ChildEventListener() {
+       mdatabase.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    String places = dataSnapshot;
+                    String places = dataSnapshot.getValue(userInterest.getClass()).toString();
 
                     PlaceArrayList.add(places);
                     adapterplacelist.notifyDataSetChanged();
@@ -96,7 +111,7 @@ public class FourthPageActivity extends AppCompatActivity {
                 }
             });
 
-*/
+
         }
 
 
@@ -118,6 +133,16 @@ public class FourthPageActivity extends AppCompatActivity {
             }
         });
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+
 
 
 

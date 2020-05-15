@@ -21,6 +21,7 @@
 
         <ListView
             android:id="@+id/placelist"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -49,12 +50,13 @@
 
     <Button
         android:id="@+id/fourtpagetext"
-        android:layout_width="172dp"
-        android:layout_height="57dp"
+        android:layout_width="158dp"
+        android:layout_height="36dp"
         android:background="@drawable/buttonshape"
         android:text="Would you like to visit specific place "
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />

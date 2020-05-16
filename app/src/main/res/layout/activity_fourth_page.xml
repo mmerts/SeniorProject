@@ -1,67 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
     tools:context=".ThirdpageActivity">
 
 
+    <ListView
+        android:id="@+id/placelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
 
-    <LinearLayout
-        android:layout_width="377dp"
-        android:layout_height="642dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/buttonplanview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fourtpagetext"
-        tools:ignore="MissingConstraints">
+    </ListView>
 
-
-        <ListView
-            android:id="@+id/placelist"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/buttonplanview"
-        android:layout_width="213dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/buttonshape"
-        android:backgroundTint="#550263"
-        android:text="Lead The Way"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonwithoutlogin"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Make My Plan"
+        android:onClick="showSelectedItems"
+        tools:ignore="OnClick" />
 
 
-    <Button
-        android:id="@+id/fourtpagetext"
-        android:layout_width="158dp"
-        android:layout_height="36dp"
-        android:background="@drawable/buttonshape"
-        android:text="Would you like to visit specific place "
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
 
-    //layout editor size:12
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -43,8 +43,6 @@ public class SecondpageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
 
 
-
-
     Spinner mSpinnerCountry,mSpinnerCity;
     String country, city;
     ValueEventListener listener;

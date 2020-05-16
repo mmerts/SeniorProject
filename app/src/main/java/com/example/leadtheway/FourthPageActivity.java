@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +40,7 @@ public class FourthPageActivity extends AppCompatActivity {
     DatabaseReference mdatabase;
     ArrayAdapter<String> adapterplacelist;
     ArrayList<String> PlaceArrayList = new ArrayList<>();
-
+    ArrayList<String> SelectedPlacesList = new ArrayList<>();
 
 
     @Override
@@ -62,20 +63,20 @@ public class FourthPageActivity extends AppCompatActivity {
 
 
 
+
+
             mdatabase = FirebaseDatabase.getInstance().getReference().child(userInterest).child(userCityChoice);//BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
 
 
-           // mdatabase = FirebaseDatabase.getInstance().getReference().child("Restaurant").child(userCityChoice);
 
 
             listView = (ListView) findViewById(R.id.placelist);
-
             leadthewaybutton = (Button) findViewById(R.id.buttonplanview);
-            //listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 
 
-            adapterplacelist = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, PlaceArrayList);
+            adapterplacelist = new ArrayAdapter<String>(this, R.layout.rowlayout, PlaceArrayList);
             listView.setAdapter(adapterplacelist);
        //     retrieveDataPlaces();
 
@@ -112,6 +113,23 @@ public class FourthPageActivity extends AppCompatActivity {
             });
 
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String selectedplaces = ((TextView)view).getText().toString();
+                    if(SelectedPlacesList.contains(selectedplaces)){
+                        SelectedPlacesList.remove(selectedplaces);
+                    }
+                    else {
+                        SelectedPlacesList.add(selectedplaces);
+                    }
+
+                }
+            });
+
+
+
+
         }
 
 
@@ -133,6 +151,17 @@ public class FourthPageActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void showSelectedItems(View view)
+    {
+        String s = "";
+        for(String item:SelectedPlacesList){
+            s += "--" + item + "/n";
+        }
+        Toast.makeText(this, "You have selected " + s, Toast.LENGTH_LONG).show();
+    }
+
 
     public boolean isActive() {
         return active;

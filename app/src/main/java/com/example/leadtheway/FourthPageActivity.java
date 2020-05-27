@@ -111,9 +111,7 @@ public class FourthPageActivity extends AppCompatActivity {
 
                 }
             });
-
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String selectedplaces = ((TextView)view).getText().toString();
@@ -123,15 +121,10 @@ public class FourthPageActivity extends AppCompatActivity {
                     else {
                         SelectedPlacesList.add(selectedplaces);
                     }
-
                 }
             });
 
-
-
-
         }
-
 
     public void retrieveDataPlaces(){
         listener = mdatabase.addValueEventListener(new ValueEventListener() {
@@ -152,16 +145,13 @@ public class FourthPageActivity extends AppCompatActivity {
         });
     }
 
-
-    public void showSelectedItems(View view)
-    {
+    public void showSelectedItems(View view) {
         String s = "";
         for(String item:SelectedPlacesList){
             s += "--" + item + "/n";
         }
         Toast.makeText(this, "You have selected " + s, Toast.LENGTH_LONG).show();
     }
-
 
     public boolean isActive() {
         return active;

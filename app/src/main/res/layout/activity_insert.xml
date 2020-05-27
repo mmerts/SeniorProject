@@ -11,12 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
-        android:hint="Deal Title"
+        android:hint="Title"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,8 +29,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
-        android:hint="Price (Numbers)"
-        android:inputType="numberDecimal"
+        android:hint="ExpectedTime"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/txtTitle"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/txtTitle"
@@ -40,15 +41,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
-        android:hint="Description"
+        android:hint="OpenClosedTime"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/txtPrice"
         app:layout_constraintStart_toStartOf="@+id/txtPrice"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrice"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
+
+    <EditText
+        android:id="@+id/longitude"
+        android:layout_width="341dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Longitude"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/txtDescription"
+        app:layout_constraintStart_toStartOf="@+id/txtDescription"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+    <EditText
+        android:id="@+id/latitude"
+        android:layout_width="343dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="latitude"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/longitude"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="@+id/longitude"
+        app:layout_constraintTop_toBottomOf="@+id/longitude" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

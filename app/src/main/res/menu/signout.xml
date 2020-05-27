@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/signOut"
-        android:title="SignOut"
-        app:showAsAction="always"></item>
+        android:title="Insert"
+        app:showAsAction="always"
+        ></item>
+    <item android:id="@+id/retrive"
+        android:title="retrive"
+        ></item>
 </menu>

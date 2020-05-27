@@ -3,6 +3,7 @@ package com.example.leadtheway;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,20 +19,29 @@ public class InsertActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;// The entry point for accesing a Firebase Database
     private DatabaseReference mDatabaseReference; // Location in my Database -- Can be used for reading & writing
     EditText txtTitle;
-    EditText txtPrice;
-    EditText txtDescription;
+    EditText txtExpectedTime;
+    EditText txtOpenClosedTime;
+    EditText txtLongitude;
+    EditText txtLatitude;
+    public static int counter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
-        FirebaseUtil.openFbReference("places");//hangi tablodan çekeceksen onun referensı
 
+
+
+        FirebaseUtil.openFbReference("places");//hangi tablodan çekeceksen onun referensı
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
         txtTitle = (EditText) findViewById(R.id.txtTitle);
-        txtPrice = (EditText)findViewById(R.id.txtPrice);
-        txtDescription = (EditText)findViewById(R.id.txtDescription);
+        txtExpectedTime = (EditText)findViewById(R.id.txtPrice);
+        txtOpenClosedTime = (EditText)findViewById(R.id.txtDescription);
+        txtLongitude = (EditText)findViewById(R.id.longitude);
+        txtLatitude = (EditText)findViewById(R.id.latitude);
+
     }
 
     @Override
@@ -47,9 +57,12 @@ public class InsertActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.signOut:
-                saveDeal();
-                Toast.makeText(this,"Deal saved",Toast.LENGTH_LONG).show();
+                saveMuseum();
+                Toast.makeText(this,"Places saved",Toast.LENGTH_LONG).show();
                 clean();
+                return true;
+            case R.id.retrive:
+                retriveActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -58,18 +71,26 @@ public class InsertActivity extends AppCompatActivity {
 
     }
 
+    private void retriveActivity() {
+        Intent intent = new Intent(InsertActivity.this, RetrieveActivity.class);
+        startActivity(intent);
+    }
+
     private void clean() {
     txtTitle.setText("");
-    txtPrice.setText("");
-    txtDescription.setText("");
+    txtExpectedTime.setText("");
+    txtOpenClosedTime.setText("");
     txtTitle.requestFocus();
     }
 
-    private void saveDeal() {
+    private void saveMuseum() {
         String title = txtTitle.getText().toString();
-        String price = txtPrice.getText().toString();
-        String description = txtDescription.getText().toString();
-        myObject deal = new myObject(title,description,price,"");
-        mDatabaseReference.child("2").push().setValue(deal);
+        String expectedTime = txtExpectedTime.getText().toString();
+        String openClosedTime = txtOpenClosedTime.getText().toString();
+        String longitude = txtLongitude.getText().toString();
+        String latitude = txtLatitude.getText().toString();
+        Museum museum = new Museum(counter,title,expectedTime,openClosedTime,"",longitude,latitude);
+        mDatabaseReference.child("Amsterdam").child("Museum").push().setValue(museum);
+        counter++;
     }
 }

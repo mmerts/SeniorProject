@@ -9,7 +9,7 @@ public class FirebaseUtil {
     public static FirebaseDatabase mFirebaseDatabase;
     public static DatabaseReference mDatabaseReference;
     private static FirebaseUtil firebaseUtil; // gerekli saçma değil
-    public static ArrayList<myObject> mDeals;
+    public static ArrayList<Museum> museumArray;
 
     private FirebaseUtil(){};
 
@@ -18,8 +18,8 @@ public class FirebaseUtil {
         {
             firebaseUtil = new FirebaseUtil();
             mFirebaseDatabase =FirebaseDatabase.getInstance();
-            mDeals = new ArrayList<myObject>();
         }
+        museumArray = new ArrayList<Museum>();
         mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
     }
 

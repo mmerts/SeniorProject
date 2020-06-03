@@ -21,7 +21,7 @@ public class RetrieveActivity extends AppCompatActivity {
 
 
     List<Museum> museumList;
-    private FirebaseDatabase mFirebaseDatabase;// The entry point for accesing a Firebase Database
+    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
     private ChildEventListener mChildListener;
@@ -43,6 +43,7 @@ public class RetrieveActivity extends AppCompatActivity {
 
         FirebaseUtil.openFbReference("places");
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
+
         query = FirebaseUtil.mDatabaseReference.child("Amsterdam").child("Museum").orderByChild("id");
         getDataWithIdArray(myArray,4);
         query.addValueEventListener(valueEventListener);

@@ -34,12 +34,13 @@ public class MuseumList extends ArrayAdapter<Museum>{
 
         TextView textViewTitle  = (TextView) listViewItem.findViewById(R.id.textViewTitle);
         TextView textViewOpenClosed = (TextView)listViewItem.findViewById(R.id.textViewOpenClosed);
+        TextView timeSchedule = (TextView)listViewItem.findViewById(R.id.timeSchedule);
 
         Museum museum = museumList.get(position);
 
         textViewTitle.setText(museum.getTitle());
-        textViewOpenClosed.setText(Integer.toString(museum.getId()));
-
+        textViewOpenClosed.setText((museum.getOpenClosedTime()));
+        timeSchedule.setText(museum.getTimeSchedule());
         return listViewItem;
     }
 }

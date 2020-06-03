@@ -16,8 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class InsertActivity extends AppCompatActivity {
 
-    private FirebaseDatabase mFirebaseDatabase;// The entry point for accesing a Firebase Database
-    private DatabaseReference mDatabaseReference; // Location in my Database -- Can be used for reading & writing
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
     EditText txtTitle;
     EditText txtExpectedTime;
     EditText txtOpenClosedTime;
@@ -32,7 +32,7 @@ public class InsertActivity extends AppCompatActivity {
 
 
 
-        FirebaseUtil.openFbReference("places");//hangi tablodan çekeceksen onun referensı
+        FirebaseUtil.openFbReference("places");
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
@@ -61,9 +61,7 @@ public class InsertActivity extends AppCompatActivity {
                 Toast.makeText(this,"Places saved",Toast.LENGTH_LONG).show();
                 clean();
                 return true;
-            case R.id.retrive:
-                retriveActivity();
-                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -89,7 +87,7 @@ public class InsertActivity extends AppCompatActivity {
         String openClosedTime = txtOpenClosedTime.getText().toString();
         String longitude = txtLongitude.getText().toString();
         String latitude = txtLatitude.getText().toString();
-        Museum museum = new Museum(counter,title,expectedTime,openClosedTime,"",longitude,latitude);
+        Museum museum = new Museum(counter,title,expectedTime,openClosedTime,"",longitude,latitude,"");
         mDatabaseReference.child("Amsterdam").child("Museum").push().setValue(museum);
         counter++;
     }

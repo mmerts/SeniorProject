@@ -24,23 +24,6 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/buttonlocation"
-        android:layout_width="116dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/buttonshape"
-        android:text="Location"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/startTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-
-    <Button
         android:id="@+id/endTime"
         android:layout_width="116dp"
         android:layout_height="38dp"

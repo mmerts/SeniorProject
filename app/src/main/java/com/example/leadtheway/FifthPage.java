@@ -1,6 +1,7 @@
 package com.example.leadtheway;
 
 import android.os.Bundle;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -12,6 +13,8 @@ public class FifthPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fifth_page);
         BottomNavigationView navView = findViewById(R.id.nav_view);

@@ -17,8 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PlaceDescription"></activity>
+        <activity
+            android:name=".ui.NoteListActivity"
+            android:label="My Note List">
 
 
+        </activity>
+        <activity
+            android:name=".ui.NoteActivity"
+            android:label="Edit My Note"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -45,7 +53,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ChoosenpageActivity" />
         <activity android:name=".ThirdpageActivity" />
-        <activity android:name=".SecondpageActivity" />
+        <activity android:name=".SecondpageActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".AnotherDatabaseExample" />
         <activity android:name=".RetrieveActivity" />

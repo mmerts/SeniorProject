@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,8 @@ public class FourthPageActivity extends AppCompatActivity {
     private String userTransportation;
     boolean active = true;
 
+    Button makemyPlan;
+
     ValueEventListener listener;
     ListView listView;
     Button leadthewaybutton;
@@ -60,26 +63,24 @@ public class FourthPageActivity extends AppCompatActivity {
         }
 
 
-
-
-
-
-
             mdatabase = FirebaseDatabase.getInstance().getReference().child(userInterest).child(userCityChoice);//BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
 
-
+            makemyPlan = (Button)findViewById(R.id.buttonplanview);
+            makemyPlan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(FourthPageActivity.this,FifthPage.class));
+                }
+            });
 
 
             listView = (ListView) findViewById(R.id.placelist);
             leadthewaybutton = (Button) findViewById(R.id.buttonplanview);
             listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-
-
             adapterplacelist = new ArrayAdapter<String>(this, R.layout.rowlayout, PlaceArrayList);
             listView.setAdapter(adapterplacelist);
        //     retrieveDataPlaces();
-
 
        mdatabase.addChildEventListener(new ChildEventListener() {
                 @Override
@@ -123,6 +124,7 @@ public class FourthPageActivity extends AppCompatActivity {
                     }
                 }
             });
+
 
         }
 

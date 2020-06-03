@@ -82,11 +82,12 @@ public class SecondpageActivity extends AppCompatActivity {
                 year = calendar.get(Calendar.YEAR);
                 month = calendar.get(Calendar.MONTH);
                 day = calendar.get(Calendar.DAY_OF_MONTH);
-                userDateChoice = day + "/" + (month+1) + "/" + year;
+
                 datePickerDialog = new DatePickerDialog(SecondpageActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                userDateChoice = day + "/" + (month+1) + "/" + year;
                                 showDate.setText(userDateChoice);
                             }}, year, month, day);
                 datePickerDialog.show();

@@ -1,23 +1,21 @@
 package com.example.leadtheway.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.leadtheway.FifthPage;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.example.leadtheway.FirebaseUtil;
 import com.example.leadtheway.Museum;
 import com.example.leadtheway.MuseumList;
+import com.example.leadtheway.PlaceDescription;
 import com.example.leadtheway.R;
-import com.example.leadtheway.RetrieveActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,20 +37,25 @@ public class TimetableFragment extends Fragment {
 
     ListView listViewPlace;
     private ValueEventListener valueEventListener;
+
+
     int [] myArray = {4,2,3,1};
 
-    String [] scheduleArray = {"10:00-12:00","13:00-14:00","16:00-17:00","19:00-21:00"};
+    String [] scheduleArray = {"10:00-12:00","13:00-14:00","16:00-18:00","19:00-21:00"};
+
 
 
     private Query query;
+    private MuseumList adapter;
+
+    public TimetableFragment() {
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        View root = inflater.inflate(R.layout.fragment_timetable, container, false);
 
         museumList = new ArrayList<Museum>();
-
 
         listViewPlace = root.findViewById(R.id.listViewPlaces);
 
@@ -61,6 +64,20 @@ public class TimetableFragment extends Fragment {
         query = FirebaseUtil.mDatabaseReference.child("Amsterdam").child("Museum").orderByChild("id");
         getDataWithIdArray(myArray,4);
         query.addValueEventListener(valueEventListener);
+
+       listViewPlace.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               Intent intent = new Intent(getActivity(),PlaceDescription.class);
+               Museum museum = (Museum) listViewPlace.getItemAtPosition(position);
+               intent.putExtra("title",museum.getTitle());
+               intent.putExtra("description",museum.getDescription());
+               intent.putExtra("latitude", museum.getLatitude());
+               intent.putExtra("longitude",museum.getLongitude());
+               startActivity(intent);
+           }
+       });
+
 
         return root;
     }
@@ -73,23 +90,25 @@ public class TimetableFragment extends Fragment {
                 for(int i=0;i<arraySize;i++) {
                     for(DataSnapshot snapshot: dataSnapshot.getChildren())
                     {
-
                         Museum museum = snapshot.getValue(Museum.class);
-
-                        if (museum.getId() == id[i])
+                        museum.setTimeSchedule(scheduleArray[i]);
+                        if (museum.getId() == id[i]) {
                             museumList.add(museum);
+                        }
                     }
-
                 }
-                MuseumList adapter = new MuseumList(getContext(), museumList);
+                adapter = new MuseumList(getContext(), museumList);
                 listViewPlace.setAdapter(adapter);
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         };
+
+
     }
 
     public static List<Museum> getMuseumList() {

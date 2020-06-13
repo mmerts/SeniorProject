@@ -1,4 +1,4 @@
-package com.example.leadtheway.ui;
+package com.example.leadtheway;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.example.leadtheway.R;
+import com.example.leadtheway.ui.DataManager;
+import com.example.leadtheway.ui.NoteActivity;
+import com.example.leadtheway.ui.NoteInfo;
+import com.example.leadtheway.ui.NoteRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -21,22 +21,28 @@ public class NoteListActivity extends AppCompatActivity {
 
     //private ArrayAdapter<NoteInfo> adapterNotes;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_list);
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NoteListActivity.this,NoteActivity.class));
+                startActivity(new Intent(NoteListActivity.this, NoteActivity.class));
             }
         });
 
         initializeDisplayContent();
     }
+
+
 
     @Override
     protected void onResume() {

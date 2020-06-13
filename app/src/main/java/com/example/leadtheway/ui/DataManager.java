@@ -21,13 +21,12 @@ public class DataManager {
     private List<PlaceInfo> mPlaces = new ArrayList<>();
     private List<NoteInfo> mNotes = new ArrayList<>();
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
 
     public static DataManager getInstance() {
         if(ourInstance == null) {
             ourInstance = new DataManager();
             ourInstance.initializePlaces();
-            ourInstance.initializeExampleNotes();
 
         }
         return ourInstance;
@@ -35,12 +34,6 @@ public class DataManager {
     public int createNewNote() {
         NoteInfo note = new NoteInfo(null, null, null);
         mNotes.add(note);
-        List<Museum> museumList = TimetableFragment.getMuseumList();
-
-        DatabaseReference myRef = database.getReference("UserNotes");
-
-        myRef.child("Gtn3KouDBOXLSS6Yy1t0lK3Dew02").child("").push().setValue("Hello World!");
-
 
         return mNotes.size() - 1;
     }
@@ -115,27 +108,5 @@ public class DataManager {
 
     }
 
-    public void initializeExampleNotes() {
-        final DataManager dm = getInstance();
-        PlaceInfo place = dm.getPlace("4");
 
-        mNotes.add(new NoteInfo(place, "Im here In MusuemPlace!!",
-                "Wow, MusuemPlace good!!"));
-
-        place = dm.getPlace("2");
-
-        mNotes.add(new NoteInfo(place, "Im here In Anne Frank House!!",
-                "Wow, Anne Frank House good!!"));
-
-
-        place = dm.getPlace("3");
-
-        mNotes.add(new NoteInfo(place, "Im here In Amsterdam Museum!!",
-                "Wow, Amsterdam Museum!! good!!"));
-
-        place = dm.getPlace("1");
-
-        mNotes.add(new NoteInfo(place, "Im here In Museum Ons' LieveHeer Op Soldier!!",
-                "Wow, Museum Ons' LieveHeer Op Soldier!! good!!"));
-    }
 }

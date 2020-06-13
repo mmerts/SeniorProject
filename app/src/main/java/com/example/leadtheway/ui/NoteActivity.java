@@ -10,9 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.leadtheway.FirebaseUtil;
+import com.example.leadtheway.NoteListActivity;
 import com.example.leadtheway.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,6 +36,7 @@ public class NoteActivity extends AppCompatActivity {
     private int notePosition;
     private int position;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +125,7 @@ public class NoteActivity extends AppCompatActivity {
             return true;
         }else if(id ==R.id.deleteNote){
             DataManager.getInstance().removeNote(position);
-            startActivity(new Intent(NoteActivity.this,NoteListActivity.class));
+            startActivity(new Intent(NoteActivity.this, NoteListActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -156,6 +156,7 @@ public class NoteActivity extends AppCompatActivity {
         mNote.setPlace((PlaceInfo) spinnerPlaces.getSelectedItem());
         mNote.setTitle(textNoteTitle.getText().toString());
         mNote.setText(textNoteText.getText().toString());
+
     }
 
     private void cancelNote() {

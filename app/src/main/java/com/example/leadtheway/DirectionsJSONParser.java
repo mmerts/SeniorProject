@@ -28,8 +28,10 @@ public class DirectionsJSONParser {
                 List path = new ArrayList<HashMap<String, String>>();
 
                 for (int j = 0; j < jLegs.length(); j++) {
+
                     JSONObject obj = ((JSONObject) jLegs.get(j)).getJSONObject("distance");
                     distance += obj.getInt("value");
+
                     obj = ((JSONObject) jLegs.get(j)).getJSONObject("duration");
                     duration += obj.getInt("value");
 

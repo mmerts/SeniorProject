@@ -1,7 +1,9 @@
 package com.example.leadtheway.ui;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,8 @@ public class NotesFragment extends Fragment {
 
     private NoteRecyclerAdapter noteRecyclerAdapter;
     private View root;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -47,11 +51,20 @@ public class NotesFragment extends Fragment {
 
     private void initializeDisplayContent() {
         final RecyclerView recyclerNotes = root.findViewById(R.id.list_notes);
+
         final LinearLayoutManager notesLayoutManager = new LinearLayoutManager(getContext());
         recyclerNotes.setLayoutManager(notesLayoutManager);
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
         noteRecyclerAdapter = new NoteRecyclerAdapter(getContext(),notes);
+
         recyclerNotes.setAdapter(noteRecyclerAdapter);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        noteRecyclerAdapter.notifyDataSetChanged();
     }
 }

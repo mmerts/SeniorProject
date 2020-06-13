@@ -96,37 +96,13 @@ public class MapFragment extends Fragment {
                     @Override
                     public void run() {
 
-                        //LatLng konum = new LatLng(52.3600,48.852);
-                        //googleMap.addMarker(new MarkerOptions().position(konum).title("Origin").snippet("Deneme").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
-
-                        //konum = new LatLng(41.118575,28.971152);
-                        //googleMap.addMarker(new MarkerOptions().position(konum).title("Destination").snippet("Deneme").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).setDraggable(true);
-
-                        /*googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-                            @Override
-                            public void onMarkerDragStart(Marker marker) {
-                                Toast.makeText(getContext(), "Start", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onMarkerDrag(Marker marker) {
-                                Toast.makeText(getContext(), "onMArkerDrag", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onMarkerDragEnd(Marker marker) {
-                                Toast.makeText(getContext(), "Bitti", Toast.LENGTH_SHORT).show();
-                            }
-                        });*/
-
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 14));
                 for (int i = 0; i< TimetableFragment.getMuseumList().size(); i++) {
                     museumlongitude = TimetableFragment.getMuseumList().get(i).getLongitude();
                     museumlatitude = TimetableFragment.getMuseumList().get(i).getLatitude();
                     museumTitle = TimetableFragment.getMuseumList().get(i).getTitle();
                     pos = new LatLng(Double.parseDouble(museumlatitude), Double.parseDouble(museumlongitude));
-                    googleMap.addMarker(new MarkerOptions().position(pos).title(museumTitle).snippet("Deneme").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setDraggable(true);
+                    googleMap.addMarker(new MarkerOptions().position(pos).title(museumTitle).snippet(Integer.toString(i+1)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setDraggable(true);
                 }
                     //LatLng pos = new LatLng(41.118575,28.971152);     // veritabanından gelen enlem-boylam
 
@@ -164,7 +140,7 @@ public class MapFragment extends Fragment {
             String key = "AIzaSyAzFWRC-8qhDaNLDl5kIo4xB6sIs3tUNhw";
             url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + key;
 
-            System.out.println("------------------------------------------------------" + url);
+            //System.out.println("------------------------------------------------------" + url);
 
             new DownloadTask().execute(url);
     }
@@ -234,7 +210,7 @@ public class MapFragment extends Fragment {
                 distance = parser.distance;
                 duration = parser.duration;
 
-                System.out.println("------------------------------------------------------" + distance);
+                //System.out.println("------------------------------------------------------" + distance);
             } catch (Exception e) {
                 e.printStackTrace();
             }

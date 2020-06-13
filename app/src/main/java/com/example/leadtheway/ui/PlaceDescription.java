@@ -1,4 +1,4 @@
-package com.example.leadtheway;
+package com.example.leadtheway.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,16 +8,18 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.leadtheway.ui.MapFragment;
-import com.example.leadtheway.ui.TimetableFragment;
+import com.example.leadtheway.DirectionsJSONParser;
+import com.example.leadtheway.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -41,6 +44,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +61,8 @@ public class PlaceDescription extends AppCompatActivity {
     private static FusedLocationProviderClient mFusedLocationClient;
     private static LatLng currentPosition;
     private static final int PERMISSION_ID = 45;
+    ImageView imageView;
+    private String imageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +72,10 @@ public class PlaceDescription extends AppCompatActivity {
 
         textPlaceTitle = findViewById(R.id.placeTitle);
         textPlaceDescription = findViewById(R.id.p_Description);
+        imageView = (ImageView) findViewById(R.id.image);
 
         displayPlace(textPlaceTitle, textPlaceDescription);
-
+        showImage(imageUrl);
         MapView mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
@@ -100,7 +107,13 @@ public class PlaceDescription extends AppCompatActivity {
             }
         });
 
-        System.out.println(distance + ", "+ duration);
+    }
+
+    void showImage(String url){
+    if(url != null && url.isEmpty() == false){
+        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        Picasso.with(this).load(url).resize(width,width*2/3).centerCrop().into(imageView);
+    }
     }
 
     private void readDisplayStateValue() {
@@ -109,6 +122,7 @@ public class PlaceDescription extends AppCompatActivity {
         description = intent.getStringExtra("description");
         latitude = intent.getStringExtra("latitude");
         longitude = intent.getStringExtra("longitude");
+        imageUrl = intent.getStringExtra("imageurl");
     }
     private void displayPlace(TextView textPlaceTitle, TextView textPlaceDescription) {
 
@@ -185,6 +199,7 @@ public class PlaceDescription extends AppCompatActivity {
 
     @SuppressLint("StaticFieldLeak")
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+        @SuppressLint("WrongThread")
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
             JSONObject jObject;
@@ -201,8 +216,19 @@ public class PlaceDescription extends AppCompatActivity {
                 TextView durationText = (TextView) findViewById(R.id.duration);
                 TextView distanceText = (TextView) findViewById(R.id.distance);
 
-                distanceText.setText(Integer.toString(distance));
-                durationText.setText(Integer.toString(duration));
+                if(distance > 1000) {
+                    int km = distance / 1000;
+                    int metres = distance % 1000;
+                    distanceText.setText("You are far way"+km+" km and "+metres+" metres.");
+                }else{
+                    distanceText.setText("You are far way"+distance+"metres.");
+                }
+                if(duration > 60)
+                {
+                    int minute = duration / 60;
+                    int second = duration % 60;
+                    durationText.setText("Your arrival time :"+minute+" minutes and "+second+" seconds.");
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -29,13 +29,14 @@ public class FourthPageActivity extends AppCompatActivity {
     private String userCountryChoice;
     private String userCityChoice;
     private String userDateChoice;
-    private String startTime;
-    private String endTime;
+    private int startTime;
+    private int endTime;
     private String userInterest;
     private String userTransportation;
     boolean active = true;
 
     Button makemyPlan;
+
 
     ValueEventListener listener;
     ListView listView;
@@ -44,7 +45,7 @@ public class FourthPageActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterplacelist;
     ArrayList<String> PlaceArrayList = new ArrayList<>();
     ArrayList<String> SelectedPlacesList = new ArrayList<>();
-
+    String selectedPlaceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +57,34 @@ public class FourthPageActivity extends AppCompatActivity {
             userCountryChoice = bundle.getString("countryChoice");
             userCityChoice = bundle.getString("CityChoice");
             userDateChoice = bundle.getString("DateChoice");
-            startTime = bundle.getString("startTime");
-            endTime = bundle.getString("endTime");
+
+            startTime = bundle.getInt("startTime");
+            endTime = bundle.getInt("endTime");
             userInterest = bundle.getString("userInterest");
             userTransportation = bundle.getString("userTransport");
         }
 
 
-            mdatabase = FirebaseDatabase.getInstance().getReference().child(userInterest).child(userCityChoice);//BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
+            mdatabase = FirebaseDatabase.getInstance().getReference().child(userInterest).child(userCityChoice); //BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
 
             makemyPlan = (Button)findViewById(R.id.buttonplanview);
             makemyPlan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(FourthPageActivity.this,FifthPage.class));
+                    for(int i=0;i<SelectedPlacesList.size();i++) {
+                        selectedPlaceId += ""+PlaceArrayList.indexOf(SelectedPlacesList.get(i))+",";
+                    }
+                    Intent intent =new Intent(FourthPageActivity.this, FifthPage.class);
+                    intent.putExtra("selectedPlace",selectedPlaceId);
+                    intent.putExtra("startTime",startTime);
+                    intent.putExtra("endTime",endTime);
+                    intent.putExtra("userInterest",userInterest);
+                    intent.putExtra("userTransport",userTransportation);
+
+                    startActivity(intent);
                 }
             });
-
+        System.out.println("ccccccccc : "+startTime);
 
             listView = (ListView) findViewById(R.id.placelist);
             leadthewaybutton = (Button) findViewById(R.id.buttonplanview);
@@ -87,7 +99,8 @@ public class FourthPageActivity extends AppCompatActivity {
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                     String places = dataSnapshot.getValue(userInterest.getClass()).toString();
-
+                    //String key = dataSnapshot.getKey();
+                    //System.out.println(key);
                     PlaceArrayList.add(places);
                     adapterplacelist.notifyDataSetChanged();
                 }
@@ -124,7 +137,6 @@ public class FourthPageActivity extends AppCompatActivity {
                     }
                 }
             });
-
 
         }
 

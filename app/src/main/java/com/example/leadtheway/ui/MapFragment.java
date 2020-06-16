@@ -140,7 +140,7 @@ public class MapFragment extends Fragment {
             String key = "AIzaSyAzFWRC-8qhDaNLDl5kIo4xB6sIs3tUNhw";
             url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + key;
 
-            //System.out.println("------------------------------------------------------" + url);
+            System.out.println("------------------------------------------------------" + url);
 
             new DownloadTask().execute(url);
     }

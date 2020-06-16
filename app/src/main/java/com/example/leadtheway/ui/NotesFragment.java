@@ -1,21 +1,18 @@
 package com.example.leadtheway.ui;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.leadtheway.NoteActivity;
 import com.example.leadtheway.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,13 +30,13 @@ public class NotesFragment extends Fragment {
 
 
         root = inflater.inflate(R.layout.activity_note_list, container, false);
-
+        Toast.makeText(getActivity(), "Press + button to add note..", Toast.LENGTH_LONG).show();
         FloatingActionButton fab = root.findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),NoteActivity.class));
+                startActivity(new Intent(getActivity(), NoteActivity.class));
             }
         });
 

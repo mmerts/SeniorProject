@@ -15,10 +15,16 @@ public class Museum implements Parcelable {
     private String latitude;
     private String timeSchedule;
     private String description;
+    private String RestaurantName;
+
+
+
+    private String Restaurantlatitude;
+    private String Restaurantlongitude;
 
 
     public Museum(){}
-    public Museum(int id,String title, String expectedTime, String OpenClosedTime, String imageUrl,String longitude,String latitude,String description) {
+    public Museum(int id,String title, String expectedTime, String OpenClosedTime, String imageUrl,String longitude,String latitude,String description,String Rname,String Rlat,String Rlong) {
         this.id = id;
         this.setTitle(title);
         this.setExpectedTime(expectedTime);
@@ -27,6 +33,9 @@ public class Museum implements Parcelable {
         this.setLongitude(longitude);
         this.setLatitude(latitude);
         this.setDescription(description);
+        this.setRestaurantName(Rname);
+        this.setRestaurantlongitude(Rlong);
+        this.setRestaurantlatitude(Rlat);
     }
 
     protected Museum(Parcel in) {
@@ -42,7 +51,29 @@ public class Museum implements Parcelable {
     }
 
 
+    public String getRestaurantName() {
+        return RestaurantName;
+    }
 
+    public void setRestaurantName(String restaurantName) {
+        RestaurantName = restaurantName;
+    }
+
+    public String getRestaurantlatitude() {
+        return Restaurantlatitude;
+    }
+
+    public void setRestaurantlatitude(String restaurantlatitude) {
+        Restaurantlatitude = restaurantlatitude;
+    }
+
+    public String getRestaurantlongitude() {
+        return Restaurantlongitude;
+    }
+
+    public void setRestaurantlongitude(String restaurantlongitude) {
+        Restaurantlongitude = restaurantlongitude;
+    }
     public String getLongitude() {
         return longitude;
     }

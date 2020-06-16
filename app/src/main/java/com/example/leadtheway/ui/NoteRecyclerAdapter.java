@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.leadtheway.NoteActivity;
 import com.example.leadtheway.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -64,7 +63,7 @@ public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext,NoteActivity.class);
+                    Intent intent = new Intent(mContext, NoteActivity.class);
                     intent.putExtra(NoteActivity.NOTE_POSITION,mCurrentPosition);
                     mContext.startActivity(intent);
                 }

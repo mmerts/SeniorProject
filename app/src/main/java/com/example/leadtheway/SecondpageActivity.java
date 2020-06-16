@@ -38,6 +38,7 @@ public class SecondpageActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     TextView showDate;
     Calendar calendar;
+    TextView notfindCity;
     int year,month,day;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -66,7 +67,14 @@ public class SecondpageActivity extends AppCompatActivity {
 
         mSpinnerCountry = findViewById(R.id.spinnercountry);
         mSpinnerCity = findViewById(R.id.spinnercity);
+        notfindCity = findViewById(R.id.not_find_city);
 
+        notfindCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SecondpageActivity.this,GiveFeedBack.class));
+            }
+        });
 
         Citybutton = (Button) findViewById(R.id.buttonselectcity);
         Countrybutton = (Button) findViewById(R.id.buttonselectcountry);
@@ -199,34 +207,9 @@ public class SecondpageActivity extends AppCompatActivity {
         });
 */
     }
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.signout,menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId())
-        {
-            case R.id.signOut:
-                logout();
-                Toast.makeText(this,"Sign out completed",Toast.LENGTH_LONG).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
 
 
-    }
 
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(SecondpageActivity.this,MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
 
     //City activity
 

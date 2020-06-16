@@ -1,4 +1,4 @@
-package com.example.leadtheway.ui;
+package com.example.leadtheway;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.leadtheway.NoteListActivity;
-import com.example.leadtheway.R;
-import com.google.firebase.database.DatabaseReference;
+import com.example.leadtheway.ui.DataManager;
+import com.example.leadtheway.ui.NoteInfo;
+import com.example.leadtheway.ui.PlaceInfo;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;

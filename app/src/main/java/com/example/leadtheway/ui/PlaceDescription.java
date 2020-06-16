@@ -63,6 +63,9 @@ public class PlaceDescription extends AppCompatActivity {
     private static final int PERMISSION_ID = 45;
     ImageView imageView;
     private String imageUrl;
+    private String restname;
+    private String restlatitude;
+    private String restlongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +99,10 @@ public class PlaceDescription extends AppCompatActivity {
                 googleMap = mMap;
                 mMap.setMyLocationEnabled(true);
                 LatLng  pos = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                LatLng rest_pos = new LatLng(Double.parseDouble(restlatitude), Double.parseDouble(restlongitude));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 14));
                 mMap.addMarker(new MarkerOptions().position(pos).title(title).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                mMap.addMarker(new MarkerOptions().position(rest_pos).title(restname).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -123,6 +128,9 @@ public class PlaceDescription extends AppCompatActivity {
         latitude = intent.getStringExtra("latitude");
         longitude = intent.getStringExtra("longitude");
         imageUrl = intent.getStringExtra("imageurl");
+        restname = intent.getStringExtra("RestaurantName");
+        restlatitude = intent.getStringExtra("Rest_lat");
+        restlongitude = intent.getStringExtra("Rest_long");
     }
     private void displayPlace(TextView textPlaceTitle, TextView textPlaceDescription) {
 

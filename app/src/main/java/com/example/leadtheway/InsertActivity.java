@@ -87,8 +87,8 @@ public class InsertActivity extends AppCompatActivity {
         String openClosedTime = txtOpenClosedTime.getText().toString();
         String longitude = txtLongitude.getText().toString();
         String latitude = txtLatitude.getText().toString();
-        Museum museum = new Museum(counter,title,expectedTime,openClosedTime,"",longitude,latitude,"");
-        mDatabaseReference.child("Amsterdam").child("Museum").push().setValue(museum);
+       // Museum museum = new Museum(counter,title,expectedTime,openClosedTime,"",longitude,latitude,"");
+        //mDatabaseReference.child("Amsterdam").child("Museum").push().setValue(museum);
         counter++;
     }
 }

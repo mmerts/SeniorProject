@@ -1,6 +1,7 @@
 package com.example.leadtheway;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -54,7 +55,9 @@ public class ThirdpageActivity extends AppCompatActivity {
     private String endTime1;
     private String userInterest;
     private String userTransportation;
-
+    static int start_time;
+    static int end_time ;
+    private String message;
 
 
     @Override
@@ -67,8 +70,6 @@ public class ThirdpageActivity extends AppCompatActivity {
         starttxt = (TextView)findViewById(R.id.txtStartTime);
         endtxt = (TextView)findViewById(R.id.txtEndTime);
 
-
-
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +81,24 @@ public class ThirdpageActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(ThirdpageActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        startTime1 = hourOfDay + ":"+ minute;
-                        starttxt.setText(startTime1);
+                        start_time = ((hourOfDay * 60) + minute);
+                        System.out.println("************Hello1 "+start_time);
+
+                        if(hourOfDay < 10 && minute < 10){
+                            startTime1 = "0"+hourOfDay + ":"+"0"+minute ;
+                            starttxt.setText(startTime1);
+                        }else if(hourOfDay < 10){
+                            startTime1 = "0"+hourOfDay + ":"+minute ;
+                            starttxt.setText(startTime1);
+                        }else if(minute < 10){
+                            startTime1 = hourOfDay + ":"+"0"+minute ;
+                            starttxt.setText(startTime1);
+                        }
+                        else{
+                            startTime1 = hourOfDay + ":"+ minute;
+                            starttxt.setText(startTime1);
+                        }
+
                     }
                 },hour,minute,true);
                 timePicker.setTitle("Please Select The Start Time");
@@ -103,23 +120,32 @@ public class ThirdpageActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(ThirdpageActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        endTime1 = hourOfDay + ":"+ minute;
-                        endtxt.setText(endTime1);
+                        end_time = ((hourOfDay * 60) + minute);
+                        System.out.println("************Hello2 "+end_time);
+                        if(hourOfDay < 10 && minute < 10){
+                            endTime1 = "0"+hourOfDay + ":"+"0"+minute ;
+                            endtxt.setText(endTime1);
+                        }else if(hourOfDay < 10){
+                            endTime1 = "0"+hourOfDay + ":"+minute ;
+                            endtxt.setText(endTime1);
+                        }else if(minute < 10){
+                            endTime1 = hourOfDay + ":"+"0"+minute ;
+                            endtxt.setText(endTime1);
+                        }
+                        else{
+                            endTime1 = hourOfDay + ":"+ minute;
+                            endtxt.setText(endTime1);
+                        }
+
                     }
+
                 },hour,minute,true);
                 timePicker.setTitle("Please Select The Start Time");
                 timePicker.setButton(DatePickerDialog.BUTTON_POSITIVE,"Set",timePicker);
                 timePicker.setButton(DatePickerDialog.BUTTON_NEGATIVE,"Cancel",timePicker);
-
                 timePicker.show();
             }
         });
-
-
-
-
-
-
 
     mSpinnerinterest = findViewById(R.id.spinnerinterest);
     mSpinnertransport = findViewById(R.id.spinnertransport);
@@ -134,8 +160,6 @@ public class ThirdpageActivity extends AppCompatActivity {
         mSpinnertransport.setAdapter(adaptertransportation);
         retrieveDataTransport();
 
-
-
         mSpinnertransport.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
@@ -148,11 +172,6 @@ public class ThirdpageActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-
-
-
-
 
         mdatabaseinterest = FirebaseDatabase.getInstance().getReference().child("Interest");
         spinnerDataListInterest = new ArrayList<>();
@@ -173,13 +192,6 @@ public class ThirdpageActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
         buttonfourtpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,6 +208,7 @@ public class ThirdpageActivity extends AppCompatActivity {
         }
 
 
+
     }
 
     private void OpenFourthPage() {
@@ -204,8 +217,8 @@ public class ThirdpageActivity extends AppCompatActivity {
         intent.putExtra("CityChoice",userCityChoice);
         intent.putExtra("DateChoice",userDateChoice);
 
-        intent.putExtra("startTime",startTime1);
-        intent.putExtra("endTime",endTime1);
+        intent.putExtra("startTime",start_time);
+        intent.putExtra("endTime",end_time);
         intent.putExtra("userInterest",userInterest);
         intent.putExtra("userTransport",userTransportation);
         startActivity(intent);

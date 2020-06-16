@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.leadtheway.ui.DataManager;
-import com.example.leadtheway.ui.NoteActivity;
 import com.example.leadtheway.ui.NoteInfo;
 import com.example.leadtheway.ui.NoteRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

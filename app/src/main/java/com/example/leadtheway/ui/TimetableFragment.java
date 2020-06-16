@@ -27,6 +27,7 @@ import com.example.leadtheway.FirebaseUtil;
 import com.example.leadtheway.Museum;
 import com.example.leadtheway.MuseumList;
 import com.example.leadtheway.R;
+import com.example.leadtheway.ThirdpageActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -70,9 +71,11 @@ public class TimetableFragment extends Fragment {
 
 
     public static List<Integer> idArray;
+    public static List<String> scheduledArray;
+
     public static List<Museum> museumList;
 
-    public  static String [] scheduleArray = {"10:00-10:30","10:30-11:00","13:00-13:11", "13:30-14:00","14:00-14:30","15:30-16:00","16:00-17:00"};
+    //public  static String [] scheduleArray = {"10:00-10:30","10:30-11:00","13:00-13:11", "13:30-14:00","14:00-14:30","15:30-16:00","16:00-17:00"};
 
     ListView listViewPlace;
 
@@ -87,11 +90,15 @@ public class TimetableFragment extends Fragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_timetable, container, false);
+        Toast.makeText(getContext(), "Please Wait 5 seconds..", Toast.LENGTH_LONG).show();
+
+
 
         museumList = new ArrayList<Museum>();
-        idArray = new ArrayList<Integer>();
+       idArray = new ArrayList<Integer>();
+       scheduledArray = new ArrayList<String>();
 
         listViewPlace = root.findViewById(R.id.listViewPlaces);
 
@@ -106,28 +113,29 @@ public class TimetableFragment extends Fragment {
                 FirebaseUtil.openFbReference("places");
                 mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
                 query = FirebaseUtil.mDatabaseReference.child("Amsterdam").child("Museum").orderByChild("id");
-
+                listViewPlace.setAdapter(adapter);
                 getDataWithIdArray(idArray, idArray.size());
                 query.addValueEventListener(valueEventListener);
             }
         }, 500);
 
 
-
-
-       listViewPlace.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Intent intent = new Intent(getActivity(),PlaceDescription.class);
-               Museum museum = (Museum) listViewPlace.getItemAtPosition(position);
-               intent.putExtra("title",museum.getTitle());
-               intent.putExtra("description",museum.getDescription());
-               intent.putExtra("latitude", museum.getLatitude());
-               intent.putExtra("longitude",museum.getLongitude());
-               intent.putExtra("imageurl",museum.getImageUrl());
-               startActivity(intent);
-           }
-       });
+        listViewPlace.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(),PlaceDescription.class);
+                Museum museum = (Museum) listViewPlace.getItemAtPosition(position);
+                intent.putExtra("title",museum.getTitle());
+                intent.putExtra("description",museum.getDescription());
+                intent.putExtra("latitude", museum.getLatitude());
+                intent.putExtra("longitude",museum.getLongitude());
+                intent.putExtra("imageurl",museum.getImageUrl());
+                intent.putExtra("RestaurantName",museum.getRestaurantName());
+                intent.putExtra("Rest_lat",museum.getRestaurantlatitude());
+                intent.putExtra("Rest_long",museum.getRestaurantlongitude());
+                startActivity(intent);
+            }
+        });
         //getAlert();
         return root;
     }
@@ -140,7 +148,7 @@ public class TimetableFragment extends Fragment {
         try {
             StringBuilder urlString = new StringBuilder("https://europe-west1-ltwapi.cloudfunctions.net/schedule?");
             urlString.append("start_time=");
-            urlString.append(500);
+            urlString.append(540);
             urlString.append("&");
             urlString.append("end_time=");
             urlString.append(1140);
@@ -156,8 +164,8 @@ public class TimetableFragment extends Fragment {
             System.out.println("aaaaaaaaaaa " + urlString.toString());
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(12000);
-            conn.setConnectTimeout(12000);
+            conn.setReadTimeout(20000);
+            conn.setConnectTimeout(20000);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -173,6 +181,8 @@ public class TimetableFragment extends Fragment {
                         JSONArray temp = jsonArray.getJSONArray(i);
                         //System.out.println("*********************************************" + temp.getString(0) + ", " + temp.getInt(1));
                         idArray.add(Integer.parseInt(temp.getString(0)));
+                        scheduledArray.add(temp.getString(1));
+                        Toast.makeText(getContext(), "You can see the map..", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -184,7 +194,7 @@ public class TimetableFragment extends Fragment {
     }
 
     public void getDataWithIdArray(final List<Integer> id, final int arraySize){
-        listViewPlace.setAdapter(adapter);
+
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -193,7 +203,7 @@ public class TimetableFragment extends Fragment {
                     for(DataSnapshot snapshot: dataSnapshot.getChildren())
                     {
                         Museum museum = snapshot.getValue(Museum.class);
-                        museum.setTimeSchedule(scheduleArray[i]);
+                        museum.setTimeSchedule(scheduledArray.get(i));
                         if (museum.getId() == id.get(i)) {
                             museumList.add(museum);
                         }
@@ -211,7 +221,8 @@ public class TimetableFragment extends Fragment {
 
 
     }
-    private void getAlert() {
+
+    /*private void getAlert() {
         Handler handler = new Handler();
         Runnable runnable;
 
@@ -223,7 +234,7 @@ public class TimetableFragment extends Fragment {
                     public void run() {
                         DateFormat format = new SimpleDateFormat("HH:mm");
                         final List<Date> start_time = new ArrayList<>(), end_time = new ArrayList<>();
-                        for (int i=0; i<scheduleArray.length; i++) {
+                        for (int i=0; i<scheduledArray.length; i++) {
                             try {
                                 start_time.add(format.parse(scheduleArray[i].split("-")[0]));
                                 end_time.add(format.parse(scheduleArray[i].split("-")[1]));
@@ -351,12 +362,12 @@ public class TimetableFragment extends Fragment {
             }
         };
         handler.post(runnable);
-    }
+    }*/
     private void getDirection(final String latitude, final String longitude) {
         String url;
         String str_origin = "origin=" + Double.toString(currentPosition.latitude) + "," + Double.toString(currentPosition.longitude);
         String str_dest = "destination=" + latitude + "," + longitude;
-        String mode = "mode=bicycling";
+        String mode = "mode=TRANSIT";
         String parameters = str_origin + "&" + str_dest + "&" + mode;
         String output = "json";
         String key = "AIzaSyAzFWRC-8qhDaNLDl5kIo4xB6sIs3tUNhw";

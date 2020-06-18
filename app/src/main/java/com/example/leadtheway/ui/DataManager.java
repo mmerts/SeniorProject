@@ -12,6 +12,9 @@ import java.util.List;
 
 import static com.example.leadtheway.FirebaseUtil.mDatabaseReference;
 
+/*
+Manage the note's data behind the android
+ */
 public class DataManager {
 
     FirebaseAuth firebaseAuth;

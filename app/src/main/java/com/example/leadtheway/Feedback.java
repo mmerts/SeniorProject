@@ -1,5 +1,9 @@
 package com.example.leadtheway;
 
+/*
+
+To collect user feedback
+ */
 public class Feedback {
     private int id;
     private String country;

@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Museum implements Parcelable {
-
+    //get all musueum information as an object.
     private int id;
     private String title;
     private String expectedTime;
@@ -16,15 +16,15 @@ public class Museum implements Parcelable {
     private String timeSchedule;
     private String description;
     private String RestaurantName;
-
-
-
+    private String Rank;
+    private String Rating;
+    private String Fee;
     private String Restaurantlatitude;
     private String Restaurantlongitude;
 
 
     public Museum(){}
-    public Museum(int id,String title, String expectedTime, String OpenClosedTime, String imageUrl,String longitude,String latitude,String description,String Rname,String Rlat,String Rlong) {
+    public Museum(int id,String title, String expectedTime, String OpenClosedTime, String imageUrl,String longitude,String latitude,String description,String Rname,String Rlat,String Rlong,String Rank,String Rating,String Fee) {
         this.id = id;
         this.setTitle(title);
         this.setExpectedTime(expectedTime);
@@ -36,6 +36,9 @@ public class Museum implements Parcelable {
         this.setRestaurantName(Rname);
         this.setRestaurantlongitude(Rlong);
         this.setRestaurantlatitude(Rlat);
+        this.setRank(Rank);
+        this.setRating(Rating);
+        this.setFee(Fee);
     }
 
     protected Museum(Parcel in) {
@@ -48,6 +51,29 @@ public class Museum implements Parcelable {
         latitude = in.readString();
         timeSchedule = in.readString();
         description = in.readString();
+    }
+    public String getRank() {
+        return Rank;
+    }
+
+    public void setRank(String rank) {
+        Rank = rank;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public String getFee() {
+        return Fee;
+    }
+
+    public void setFee(String fee) {
+        Fee = fee;
     }
 
 

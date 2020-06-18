@@ -22,9 +22,6 @@
         <activity android:name=".GiveFeedBack">
 
         </activity>
-        <activity android:name=".UploadImage">
-
-        </activity>
         <activity android:name=".ui.PlaceDescription" />
         <activity
             android:name=".NoteListActivity"
@@ -54,22 +51,20 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".ChoosenpageActivity" />
         <activity android:name=".ThirdpageActivity" >
 
         </activity>
         <activity android:name=".SecondpageActivity">
+
+        </activity>
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" >
-
-        </activity>
         <activity android:name=".RetrieveActivity" />
-        <activity android:name=".InsertActivity" />
     </application>
 
 </manifest>

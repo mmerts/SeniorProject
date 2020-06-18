@@ -6,14 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,10 +31,8 @@ public class FourthPageActivity extends AppCompatActivity {
     private int endTime;
     private String userInterest;
     private String userTransportation;
-    boolean active = true;
 
     Button makemyPlan;
-
 
     ValueEventListener listener;
     ListView listView;
@@ -51,9 +47,10 @@ public class FourthPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fourth_page);
-
+        SelectedPlacesList.clear();
+        //get data from previous activity.
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
+        if (bundle != null) {
             userCountryChoice = bundle.getString("countryChoice");
             userCityChoice = bundle.getString("CityChoice");
             userDateChoice = bundle.getString("DateChoice");
@@ -64,92 +61,66 @@ public class FourthPageActivity extends AppCompatActivity {
             userTransportation = bundle.getString("userTransport");
         }
 
+        //connection to firebase database userinterest child.
+        mdatabase = FirebaseDatabase.getInstance().getReference().child(userInterest).child(userCityChoice);
 
-            mdatabase = FirebaseDatabase.getInstance().getReference().child(userInterest).child(userCityChoice); //BURAYA USER INTEREST VE CİTY PREFERENCE GELDİĞİNDE ÇALIŞMASI LAZIM BUNDLEDAN ÇEKEMİYOR.
+        makemyPlan = (Button) findViewById(R.id.buttonplanview);
 
-            makemyPlan = (Button)findViewById(R.id.buttonplanview);
-            makemyPlan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    for(int i=0;i<SelectedPlacesList.size();i++) {
-                        selectedPlaceId += ""+PlaceArrayList.indexOf(SelectedPlacesList.get(i))+",";
-                    }
-                    Intent intent =new Intent(FourthPageActivity.this, FifthPage.class);
-                    intent.putExtra("selectedPlace",selectedPlaceId);
-                    intent.putExtra("startTime",startTime);
-                    intent.putExtra("endTime",endTime);
-                    intent.putExtra("userInterest",userInterest);
-                    intent.putExtra("userTransport",userTransportation);
-
-                    startActivity(intent);
-                }
-            });
-        System.out.println("ccccccccc : "+startTime);
-
-            listView = (ListView) findViewById(R.id.placelist);
-            leadthewaybutton = (Button) findViewById(R.id.buttonplanview);
-            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-            adapterplacelist = new ArrayAdapter<String>(this, R.layout.rowlayout, PlaceArrayList);
-            listView.setAdapter(adapterplacelist);
-       //     retrieveDataPlaces();
-
-       mdatabase.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    String places = dataSnapshot.getValue(userInterest.getClass()).toString();
-                    //String key = dataSnapshot.getKey();
-                    //System.out.println(key);
-                    PlaceArrayList.add(places);
-                    adapterplacelist.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String selectedplaces = ((TextView)view).getText().toString();
-                    if(SelectedPlacesList.contains(selectedplaces)){
-                        SelectedPlacesList.remove(selectedplaces);
-                    }
-                    else {
-                        SelectedPlacesList.add(selectedplaces);
-                    }
-                }
-            });
-
-        }
-
-    public void retrieveDataPlaces(){
-        listener = mdatabase.addValueEventListener(new ValueEventListener() {
+        //Select id of clicked item in listview
+        makemyPlan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot item:dataSnapshot.getChildren()){
-                    String places = item.getValue().toString();
-                    PlaceArrayList.add(places);
+            public void onClick(View v) {
+                selectedPlaceId = "";
+                if (SelectedPlacesList.size() != 0) {
+                    int i = 0;
+                    for (; i < SelectedPlacesList.size() - 1; i++) {
+                        selectedPlaceId += "" + (PlaceArrayList.indexOf(SelectedPlacesList.get(i)) + 1) + ",";
 
+                    }
+                    selectedPlaceId += "" + (PlaceArrayList.indexOf(SelectedPlacesList.get(i)) + 1);
+                    System.out.println("ppppppp" + selectedPlaceId);
+                } else {
+                    selectedPlaceId = "0";
                 }
+                //Pass data from this activity to fifth page activity
+                Intent intent = new Intent(FourthPageActivity.this, FifthPage.class);
+                intent.putExtra("startTime", startTime);
+                intent.putExtra("endTime", endTime);
+                intent.putExtra("userInterest", userInterest);
+                intent.putExtra("userTransport", userTransportation);
+                intent.putExtra("selectedPlace", selectedPlaceId);
+                startActivity(intent);
+            }
+        });
+
+        listView = (ListView) findViewById(R.id.placelist);
+        leadthewaybutton = (Button) findViewById(R.id.buttonplanview);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        adapterplacelist = new ArrayAdapter<String>(this, R.layout.rowlayout, PlaceArrayList);
+        listView.setAdapter(adapterplacelist);
+
+        mdatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String places = dataSnapshot.getValue(userInterest.getClass()).toString();
+                PlaceArrayList.add(places);
                 adapterplacelist.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -157,26 +128,18 @@ public class FourthPageActivity extends AppCompatActivity {
 
             }
         });
+        //selected item add to arraylist in order to reach their id.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedplaces = ((TextView) view).getText().toString();
+                if (SelectedPlacesList.contains(selectedplaces)) {
+                    SelectedPlacesList.remove(selectedplaces);
+                } else {
+                    SelectedPlacesList.add(selectedplaces);
+                }
+            }
+        });
+
     }
-
-    public void showSelectedItems(View view) {
-        String s = "";
-        for(String item:SelectedPlacesList){
-            s += "--" + item + "/n";
-        }
-        Toast.makeText(this, "You have selected " + s, Toast.LENGTH_LONG).show();
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-
-
-
-
 }

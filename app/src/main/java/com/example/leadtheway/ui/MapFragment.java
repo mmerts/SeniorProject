@@ -59,10 +59,11 @@ public class MapFragment extends Fragment {
     private String museumlatitude;
     private String museumTitle;
     private LatLng pos;
+    //to draw path for all places in museumlist.
     private ArrayList<Pair<String, String>> waypoints;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_map, container, false);
 
         //Map Initialize
@@ -81,31 +82,25 @@ public class MapFragment extends Fragment {
         getLastLocation();
 
         //SetMarker
-
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
                 googleMap.setMyLocationEnabled(true);
-                // Haritanın ya da kameranın başlangıçtaki konumu
-
- //               LatLngBounds Eminonu = new LatLngBounds(new LatLng(41, 28.96), new LatLng(41.03, 28.98));
-   //             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Eminonu.getCenter(), 14));// 14 zoom ayarı
-
+               // if connection completed successfully, map set all marker.
+                // Set all marker when museumlist array fill.
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
 
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 14));
-                for (int i = 0; i< TimetableFragment.getMuseumList().size(); i++) {
-                    museumlongitude = TimetableFragment.getMuseumList().get(i).getLongitude();
-                    museumlatitude = TimetableFragment.getMuseumList().get(i).getLatitude();
-                    museumTitle = TimetableFragment.getMuseumList().get(i).getTitle();
-                    pos = new LatLng(Double.parseDouble(museumlatitude), Double.parseDouble(museumlongitude));
-                    googleMap.addMarker(new MarkerOptions().position(pos).title(museumTitle).snippet(Integer.toString(i+1)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setDraggable(true);
-                }
-                    //LatLng pos = new LatLng(41.118575,28.971152);     // veritabanından gelen enlem-boylam
-
+                        for (int i = 0; i < TimetableFragment.getMuseumList().size(); i++) {
+                            museumlongitude = TimetableFragment.getMuseumList().get(i).getLongitude();
+                            museumlatitude = TimetableFragment.getMuseumList().get(i).getLatitude();
+                            museumTitle = TimetableFragment.getMuseumList().get(i).getTitle();
+                            pos = new LatLng(Double.parseDouble(museumlatitude), Double.parseDouble(museumlongitude));
+                            googleMap.addMarker(new MarkerOptions().position(pos).title(museumTitle).snippet(Integer.toString(i + 1)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setDraggable(true);
+                        }
                         getDirection();
                     }
                 }, 300);
@@ -115,34 +110,33 @@ public class MapFragment extends Fragment {
         return root;
     }
 
+    // to draw the path current location to destination
     private void getDirection() {
         //waypoints.add(new Pair<String, String>("41.118575","28.971152"));
         //waypoints.add(new Pair<String, String>("41.168575","28.971152"));
         //waypoints.add(new Pair<String, String>("41.198575","28.971152"));
-
-            String url;
-            String str_origin = "origin=" + Double.toString(currentPosition.latitude) + "," + Double.toString(currentPosition.longitude);
-            StringBuilder str_dest = new StringBuilder("destination=");
-            String mode = "mode=TRANSIT";
-            StringBuilder waypoint = new StringBuilder("waypoints=");
-            for (int i = 0; i< TimetableFragment.getMuseumList().size(); i++) {
-                if (i == 0) {
-                    waypoint.append(TimetableFragment.getMuseumList().get(i).getLatitude() + "," + TimetableFragment.getMuseumList().get(i).getLongitude());
-                }
-                else if(i == TimetableFragment.getMuseumList().size()-1)
-                 str_dest.append(TimetableFragment.getMuseumList().get(i).getLatitude() + "," + TimetableFragment.getMuseumList().get(i).getLongitude());
-                else {
-                    waypoint.append("|").append(TimetableFragment.getMuseumList().get(i).getLatitude() + "," + TimetableFragment.getMuseumList().get(i).getLongitude());
-                }
+        String url;
+        String str_origin = "origin=" + String.format("%.4f", currentPosition.latitude) + "," + String.format("%.4f", currentPosition.longitude);
+        StringBuilder str_dest = new StringBuilder("destination=");
+        String mode = "mode=walking";
+        StringBuilder waypoint = new StringBuilder("waypoints=");
+        for (int i = 0; i < TimetableFragment.getMuseumList().size(); i++) {
+            if (i == 0) {
+                waypoint.append(TimetableFragment.getMuseumList().get(i).getLatitude() + "," + TimetableFragment.getMuseumList().get(i).getLongitude());
+            } else if (i == TimetableFragment.getMuseumList().size() - 1)
+                str_dest.append(TimetableFragment.getMuseumList().get(i).getLatitude() + "," + TimetableFragment.getMuseumList().get(i).getLongitude());
+            else {
+                waypoint.append("|").append(TimetableFragment.getMuseumList().get(i).getLatitude() + "," + TimetableFragment.getMuseumList().get(i).getLongitude());
             }
-            String parameters = str_origin + "&" + str_dest + "&" + mode + "&" + waypoint;
-            String output = "json";
-            String key = "AIzaSyAzFWRC-8qhDaNLDl5kIo4xB6sIs3tUNhw";
-            url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + key;
+        }
+        String parameters = str_origin + "&" + str_dest + "&" + mode + "&" + waypoint;
+        String output = "json";
+        String key = "AIzaSyAzFWRC-8qhDaNLDl5kIo4xB6sIs3tUNhw";
+        url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + key;
 
-            System.out.println("------------------------------------------------------" + url);
+        System.out.println("------------------------------------------------------" + url);
 
-            new DownloadTask().execute(url);
+        new DownloadTask().execute(url);
     }
 
     private String downloadUrl(String strUrl) throws IOException {
@@ -222,7 +216,7 @@ public class MapFragment extends Fragment {
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList points;
             PolylineOptions lineOptions;
-            int[] colors = {Color.RED,Color.GREEN,Color.GRAY,Color.MAGENTA,Color.CYAN};
+            int[] colors = {Color.RED, Color.GREEN, Color.GRAY, Color.MAGENTA, Color.CYAN};
             for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList();
                 lineOptions = new PolylineOptions();

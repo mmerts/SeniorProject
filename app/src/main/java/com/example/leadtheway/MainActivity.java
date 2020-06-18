@@ -9,19 +9,21 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonsecondpage;
+    private Button buttonsecondpage; // create all buttons
     private Button registerButton;
     private Button loginButton;
-    //test
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //test
+
+        //activate buttons
         buttonsecondpage = (Button) findViewById(R.id.buttonmain);
         registerButton = (Button) findViewById(R.id.buttonregister);
         loginButton = (Button) findViewById(R.id.buttonlogin);
 
+        // navigate user when user press button
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // navigate user when user press button
         buttonsecondpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        // navigate user when user press button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

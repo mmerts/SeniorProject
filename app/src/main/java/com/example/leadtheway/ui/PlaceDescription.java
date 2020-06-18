@@ -143,7 +143,7 @@ public class PlaceDescription extends AppCompatActivity {
         String url;
         String str_origin = "origin=" + Double.toString(currentPosition.latitude) + "," + Double.toString(currentPosition.longitude);
         String str_dest = "destination=" + latitude + "," + longitude;
-        String mode = "mode=TRANSIT";
+        String mode = "mode=walking";
         String parameters = str_origin + "&" + str_dest + "&" + mode;
         String output = "json";
         String key = "AIzaSyAzFWRC-8qhDaNLDl5kIo4xB6sIs3tUNhw";
@@ -227,9 +227,9 @@ public class PlaceDescription extends AppCompatActivity {
                 if(distance > 1000) {
                     int km = distance / 1000;
                     int metres = distance % 1000;
-                    distanceText.setText("You are far way"+km+" km and "+metres+" metres.");
+                    distanceText.setText("You are far way "+km+" km and "+metres+" metres.");
                 }else{
-                    distanceText.setText("You are far way"+distance+"metres.");
+                    distanceText.setText("You are far way "+distance+"metres.");
                 }
                 if(duration > 60)
                 {

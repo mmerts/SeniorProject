@@ -18,34 +18,35 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
+    //Define user interface component
     EditText email;
     EditText password;
     Button signup;
-
+    //Define authentication component
     FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        // Create ui component
         email = findViewById(R.id.Registermail);
         password = findViewById(R.id.Registerpassword);
         signup = findViewById(R.id.btnSignUp);
-
+        //get firebase authentication instance
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //user can register with email and password.If they already register the system makes toast message to user.
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(RegisterActivity.this,"Registered successfully",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

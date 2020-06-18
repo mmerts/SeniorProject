@@ -14,7 +14,9 @@ import com.example.leadtheway.NoteActivity;
 import com.example.leadtheway.R;
 
 import java.util.List;
-
+/*
+To display note in recylerview, NoteRecylerAdapter have to be used.
+ */
 public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder>{
 
     private final Context mContext;

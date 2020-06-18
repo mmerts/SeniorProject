@@ -19,19 +19,12 @@
 
         <TextView
             android:id="@+id/distance"
-            android:layout_width="286dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="65dp"
-            android:layout_marginBottom="15dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="404dp"
+            android:layout_height="match_parent"></TextView>
 
         <TextView
             android:id="@+id/duration"
-            android:layout_width="346dp"
+            android:layout_width="407dp"
             android:layout_height="43dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="64dp"
@@ -42,7 +35,7 @@
 
         <TextView
             android:id="@+id/placeTitle"
-            android:layout_width="356dp"
+            android:layout_width="408dp"
             android:layout_height="51dp"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -55,19 +48,22 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="359dp"
-            android:layout_height="139dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="325dp"
+            android:layout_height="115dp"
             app:srcCompat="@android:drawable/screen_background_dark_transparent" />
 
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="403dp"
+            android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/p_Description"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/placeTitle"
@@ -79,8 +75,8 @@
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
-            android:layout_width="354dp"
-            android:layout_height="407dp"
+            android:layout_width="410dp"
+            android:layout_height="403dp"
             android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/p_Description"

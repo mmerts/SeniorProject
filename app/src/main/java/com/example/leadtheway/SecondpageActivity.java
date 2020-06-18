@@ -7,7 +7,9 @@ import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import java.util.Calendar;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,17 +36,16 @@ import java.util.Date;
 public class SecondpageActivity extends AppCompatActivity {
 
     DatabaseReference mdatabase;
-    Button buttonthirdpage, Countrybutton, Citybutton,selectDate;
+    Button buttonthirdpage, Countrybutton, Citybutton, selectDate;
     DatePickerDialog datePickerDialog;
     TextView showDate;
-    Calendar calendar;
+    Calendar calendar;   // to get the day
     TextView notfindCity;
-    int year,month,day;
+    int year, month, day; // when date picked in datetime picker
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-
-    Spinner mSpinnerCountry,mSpinnerCity;
+    Spinner mSpinnerCountry, mSpinnerCity;
     String country, city;
     ValueEventListener listener;
     ArrayAdapter<String> adaptercountry;
@@ -53,7 +54,6 @@ public class SecondpageActivity extends AppCompatActivity {
     ArrayList<String> spinnerDataListCountry;
     ArrayList<String> spinnerDataListCity;
     private String userDateChoice;
-
 
 
     @Override
@@ -72,7 +72,7 @@ public class SecondpageActivity extends AppCompatActivity {
         notfindCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SecondpageActivity.this,GiveFeedBack.class));
+                startActivity(new Intent(SecondpageActivity.this, GiveFeedBack.class));
             }
         });
 
@@ -80,9 +80,9 @@ public class SecondpageActivity extends AppCompatActivity {
         Countrybutton = (Button) findViewById(R.id.buttonselectcountry);
         buttonthirdpage = (Button) findViewById(R.id.buttonNext);
 
-
+        // pick date in calendar
         showDate = (TextView) findViewById(R.id.datetxt);
-        selectDate = (Button)findViewById(R.id.buttonDate);
+        selectDate = (Button) findViewById(R.id.buttonDate);
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,35 +95,26 @@ public class SecondpageActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                userDateChoice = day + "/" + (month+1) + "/" + year;
+                                userDateChoice = day + "/" + (month + 1) + "/" + year;
                                 showDate.setText(userDateChoice);
-                            }}, year, month, day);
+                            }
+                        }, year, month, day);
                 datePickerDialog.show();
 
             }
         });
 
-
-
-
-
+        //Connecting to database and get Countries
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Countries");
         spinnerDataListCountry = new ArrayList<>();
         adaptercountry = new ArrayAdapter<String>(SecondpageActivity.this, android.R.layout.simple_spinner_dropdown_item, spinnerDataListCountry);
         mSpinnerCountry.setAdapter(adaptercountry);
         retrieveDataCountry();
 
-
-
-
-
-
-
-
+        //choose item from spinner and automatically update other spinner with respect to country choice.
         mSpinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-                // mdatabase = FirebaseDatabase.getInstance().getReference().child("Cities");
                 Countrybutton.setText(parent.getItemAtPosition(position).toString());
                 country = parent.getItemAtPosition(position).toString(); // hold country information
 
@@ -133,8 +124,7 @@ public class SecondpageActivity extends AppCompatActivity {
                 mSpinnerCity.setAdapter(adaptercity);
                 retrieveDataCity();
 
-
-
+                //pass item into the spinner
                 mSpinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int positioncity, long l) {
@@ -159,75 +149,30 @@ public class SecondpageActivity extends AppCompatActivity {
 
         });
 
-
-
-        //ArrayAdapter arraycountry = new ArrayAdapter(this, android.R.layout.simple_spinner_item, countryoptions);
-        //arraycountry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //mSpinnerCountry.setAdapter(arraycountry);
-/*
-        mdatabase = FirebaseDatabase.getInstance().getReference().child("Countries");
-        mdatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 c1 = dataSnapshot.child("Countryid1").getValue().toString();
-                 c2 = dataSnapshot.child("Countryid2").getValue().toString();
-                 c3 = dataSnapshot.child("Countryid3").getValue().toString();
-
-
-
-            }
-
-
-
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-*/
+        //when user press the third page
         buttonthirdpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 OpenThirdPage();
             }
         });
-
-
-//when click country/city button go to citybutton page and selection of country then city
- /*       Countrybutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SecondpageActivity.this, CityButton.class);
-                startActivity(intent);
-            }
-        });
-*/
     }
 
-
-
-
-    //City activity
-
-    public void OpenThirdPage(){
+    //Pass the data between activities for example, countrychoice, city choice and date choice
+    public void OpenThirdPage() {
 
         Intent intent = new Intent(this, ThirdpageActivity.class);
-        intent.putExtra("countryChoice",country);
-        intent.putExtra("CityChoice",city);
-        intent.putExtra("DateChoice",userDateChoice);
+        intent.putExtra("countryChoice", country);
+        intent.putExtra("CityChoice", city);
+        intent.putExtra("DateChoice", userDateChoice);
         startActivity(intent);
     }
-
-
-    public void retrieveDataCountry(){
+    // Retrive Country data from database
+    public void retrieveDataCountry() {
         listener = mdatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot item:dataSnapshot.getChildren()){
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     String data = item.getValue().toString();
                     spinnerDataListCountry.add(data);
                 }
@@ -241,12 +186,12 @@ public class SecondpageActivity extends AppCompatActivity {
         });
     }
 
-
-    public void retrieveDataCity(){
+//retrieve city with respect the country.
+    public void retrieveDataCity() {
         listener = mdatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot item:dataSnapshot.getChildren()){
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     String data = item.getValue().toString();
                     spinnerDataListCity.add(data);
 
@@ -260,8 +205,6 @@ public class SecondpageActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 }

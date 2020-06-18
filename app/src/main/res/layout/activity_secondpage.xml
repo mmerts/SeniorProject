@@ -45,8 +45,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="173dp"
-        android:layout_height="143dp"
+        android:layout_width="201dp"
+        android:layout_height="162dp"
         android:layout_margin="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/buttonDate"
@@ -70,7 +70,7 @@
 
         <Spinner
             android:id="@+id/spinnercountry"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginBottom="20dp" />
 
@@ -89,7 +89,7 @@
 
         <Spinner
             android:id="@+id/spinnercity"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="25dp" />
 
 
@@ -110,10 +110,10 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="278dp"
-        android:layout_height="55dp"
+        android:layout_width="397dp"
+        android:layout_height="21dp"
         android:fontFamily="sans-serif"
-        android:text="Please Select your date of travel"
+        android:text="In which country and city do you want to travel?"
         android:textAlignment="viewStart"
         android:textColor="#932424"
         android:textSize="18sp"
@@ -129,11 +129,11 @@
 
     <TextView
         android:id="@+id/not_find_city"
-        android:layout_width="398dp"
-        android:layout_height="25dp"
+        android:layout_width="402dp"
+        android:layout_height="36dp"
         android:layout_marginTop="32dp"
-        android:text="Did not find the country / city? Click Report us !"
-        android:textSize="18sp"
+        android:text="Did not find the country / city? Click and Report us !"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"

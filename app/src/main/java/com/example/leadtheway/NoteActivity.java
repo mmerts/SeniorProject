@@ -43,8 +43,6 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
-
-
         spinnerPlaces = findViewById(R.id.spinner_places);
 
         List<PlaceInfo> courses = DataManager.getInstance().getPlaces();
@@ -53,12 +51,13 @@ public class NoteActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPlaces.setAdapter(adapter);
 
+
         readDisplayStateValues();
         SaveOriginalNoteValues();
 
         textNoteTitle = findViewById(R.id.text_note_title);
         textNoteText = findViewById(R.id.text_note_text);
-
+        //if it is not new note display note in the page.
         if(!mIsNewNote)
         displayNote(spinnerPlaces, textNoteTitle, textNoteText);
 
@@ -72,7 +71,7 @@ public class NoteActivity extends AppCompatActivity {
         originalNoteTitle = mNote.getTitle();
         originalNoteText = mNote.getText();
     }
-
+    // display note
     private void displayNote(Spinner spinnerPlaces, EditText textNoteTitle, EditText textNoteText) {
        List<PlaceInfo> places  = DataManager.getInstance().getPlaces();
        int placeIndex =  places.indexOf(mNote.getPlace());
@@ -82,7 +81,7 @@ public class NoteActivity extends AppCompatActivity {
        textNoteTitle.setText(mNote.getTitle());
        textNoteText.setText(mNote.getText());
     }
-
+    // when user click to the note read item position of note.If plus button pressed create new note.
     private void readDisplayStateValues() {
         Intent intent = getIntent();
         position = intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET);
@@ -93,27 +92,21 @@ public class NoteActivity extends AppCompatActivity {
             mNote = DataManager.getInstance().getNotes().get(position);
         }
     }
-
+    //Create new note and add to the arraylist.
     private void createNewNote() {
-
         DataManager dm = DataManager.getInstance();
-        //String userId = firebaseAuth.getCurrentUser().getUid();
         notePosition = dm.createNewNote();
         mNote = dm.getNotes().get(notePosition);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_note, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -145,6 +138,7 @@ public class NoteActivity extends AppCompatActivity {
     }
     }
 
+    //store notes info if note activity pass to the Gmail.
     private void storePreviousNoteValues() {
         PlaceInfo place = DataManager.getInstance().getPlace(originalNotePlaceId);
         mNote.setPlace(place);
@@ -152,18 +146,19 @@ public class NoteActivity extends AppCompatActivity {
         mNote.setText(originalNoteText);
     }
 
+    //save not when back button pressed.
     private void saveNote() {
         mNote.setPlace((PlaceInfo) spinnerPlaces.getSelectedItem());
         mNote.setTitle(textNoteTitle.getText().toString());
         mNote.setText(textNoteText.getText().toString());
 
     }
-
+    //if user edit note and did not want to delete user cancel the edit
     private void cancelNote() {
         mIsCancelling = true;
         finish();
     }
-
+    //send note as a mail to the someone else via Gmail.
     private void sendMail() {
         PlaceInfo place = (PlaceInfo) spinnerPlaces.getSelectedItem();
         String subject = textNoteTitle.getText().toString();

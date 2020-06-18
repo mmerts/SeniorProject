@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+/*
+This class parse response of direction API.
+ */
 public class DirectionsJSONParser {
     public int distance = 0;
     public int duration = 0;

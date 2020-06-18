@@ -3,6 +3,10 @@ package com.example.leadtheway.ui;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/*
+simple note class with getter and setter in order to keep as an object.
+ */
+
 public final class NoteInfo implements Parcelable {
     private PlaceInfo mPlace;
     private String mTitle;
